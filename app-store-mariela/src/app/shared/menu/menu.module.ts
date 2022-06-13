@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from '../../app-routing.module';
 import { MaterialModule } from '../modules/material.module';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     CommonModule,
@@ -14,7 +16,8 @@ import { MaterialModule } from '../modules/material.module';
     MaterialModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ]
 })
 export class MenuModule { }

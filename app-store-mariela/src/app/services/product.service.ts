@@ -21,4 +21,8 @@ export class ProductService {
   saveProduct(product: Product): Observable<Product>{
     return this.http.post<Product>(this.productUrl, product, {headers: this.header});
   }
+
+  getProducts(): Observable<Product[]>{
+    return this.http.get<Product[]>(this.productUrl + '/all', {headers: this.header});
+  }
 }

@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #fff; 
+}
+.example-full-width {
+    width: 100%;
+}
+.mt-1 {
+    margin-top: 1rem;
+}
+@media (max-width: 716px) {
+    .container {
+        display: flex;
+        justify-content: inherit;
+        margin: 20px;
+    }
+    mat-card {
+        width: 350px;
+    }
+}
+
+@media (max-width: 468px) {
+    .container {
+        display: flex;
+        justify-content: inherit;
+        margin: 20px;
+    }
+    mat-card {
+        width: 300px;
+    }
+}

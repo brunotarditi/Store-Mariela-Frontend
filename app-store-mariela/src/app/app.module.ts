@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuModule } from './shared/menu/menu.module';
 @NgModule({
   declarations: [
@@ -12,12 +10,9 @@ import { MenuModule } from './shared/menu/menu.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MenuModule
+    MenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

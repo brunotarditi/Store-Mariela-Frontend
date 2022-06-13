@@ -13,7 +13,7 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class HomeModule { }
