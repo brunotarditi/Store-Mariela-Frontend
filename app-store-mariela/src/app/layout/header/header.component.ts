@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { StorageService } from '../../services/storage.service';
-import { ThemeService } from '../../services/theme.service';
-
+import { StorageService } from '@shared/services/storage.service';
+import { ThemeService } from '@shared/services/theme.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -26,6 +25,7 @@ export class HeaderComponent implements OnInit {
       this.themeService.theme$.emit('light-theme');
       this.storageService.set('theme', this.theme);
       this.storageService.set('themeColor', 'light-theme');
+
     }else{
       this.theme = !this.theme;
       this.themeService.theme$.emit('dark-theme');

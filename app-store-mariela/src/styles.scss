@@ -22,12 +22,12 @@ $my-app-dark-theme:mat-dark-theme($my-app-dark-primary, $my-app-dark-accent, $my
 @include angular-material-theme($my-app-light-theme);
 .light-theme{
     @include angular-material-theme($my-app-light-theme);
-    background-color: #fff;
+    // background-color: #fff;
     color: #222;
 }
 
 .dark-theme{
     @include angular-material-theme($my-app-dark-theme);
-    background-color: #222;
+    // background-color: #222;
     color: #fff;
 }

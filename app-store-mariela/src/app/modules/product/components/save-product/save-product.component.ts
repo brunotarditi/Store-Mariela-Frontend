@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Product } from 'src/app/models/product';
+import { Product } from '@data/models/product';
 
 @Component({
   selector: 'app-save-product',

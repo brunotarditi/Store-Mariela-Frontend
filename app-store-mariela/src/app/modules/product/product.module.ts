@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
-import { MaterialModule } from 'src/app/shared/modules/material.module';
+import { SharedModule } from '@shared/shared.module';
 import { ListProductsComponent } from './components/list-products/list-products.component';
 import { SaveProductComponent } from './components/save-product/save-product.component';
 
@@ -13,11 +11,8 @@ import { SaveProductComponent } from './components/save-product/save-product.com
     SaveProductComponent
   ],
   imports: [
-    CommonModule,
-    MaterialModule,
+    SharedModule,
     ProductRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
   ]
 })
 export class ProductModule { }

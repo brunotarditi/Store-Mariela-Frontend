@@ -4,11 +4,9 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [{
   path: '',
-  children: [
-    {path: '', component: HomeComponent},
-    {path: '**', redirectTo:'', pathMatch: 'full'}
-  ]
-}];
+  component: HomeComponent
+},
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

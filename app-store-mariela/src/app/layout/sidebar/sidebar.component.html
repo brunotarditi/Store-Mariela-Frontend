@@ -1,5 +1,5 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
-  <app-header (drawer)="snav.toggle()"></app-header>
+  <app-header (drawer)="snav.toggle()" ></app-header>
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" [opened]="mobileQuery.matches ? false : true">
       <mat-nav-list>

@@ -4,14 +4,8 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { SaveProductComponent } from './components/save-product/save-product.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {path: '', component: ListProductsComponent},
-      {path: 'save', component: SaveProductComponent},
-      {path: '**', redirectTo:'', pathMatch: 'full'}
-    ]
-  }
+  { path: '', component: ListProductsComponent },
+  { path: 'save', component: SaveProductComponent }
 ];
 
 @NgModule({
