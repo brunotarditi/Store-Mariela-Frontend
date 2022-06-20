@@ -11,7 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [],
   imports: [
@@ -28,6 +31,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatTooltipModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatGridListModule,
   ],
   exports:[
     MatSidenavModule,
@@ -43,6 +49,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatTooltipModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatGridListModule
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}]
 })

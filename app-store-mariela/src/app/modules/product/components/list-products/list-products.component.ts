@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '@data/models/product';
 import { ProductService } from '@data/services/product.service';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-list-products',
@@ -11,27 +13,48 @@ import { Router } from '@angular/router';
 })
 export class ListProductsComponent implements OnInit {
 
+  text = 'Mis productos'; 
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
   displayedColumns: string[];
-  products: Product[] = [];
-  dataSource = new MatTableDataSource(this.products);
+  dataSource: MatTableDataSource<Product>;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  resultsLength = 0;
+  isLoadingResults = true;
+
   constructor(private productService: ProductService, private router: Router) {
     this.displayedColumns = ['id', 'name', 'price']
-  }
-
-  searchFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  getProducts():void{
-    this.productService.getProducts().subscribe(p => this.products = p)
+  searchFilter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator)
+      this.dataSource.paginator.firstPage();
   }
 
-  addProduct(): void{
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe(data => {
+      this.isLoadingResults = true;
+      this.resultsLength = data.length;
+      this.dataSource = new MatTableDataSource<Product>(data);
+      if (this.dataSource) {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    },
+    err => {
+      console.log(err)
+    });
+  }
+
+  addProduct(): void {
     this.router.navigate(['/product/save']);
   }
 }
