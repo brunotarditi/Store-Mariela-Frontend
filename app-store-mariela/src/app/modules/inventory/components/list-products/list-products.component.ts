@@ -3,7 +3,7 @@ import { Product } from '@data/models/product';
 import { ProductService } from '@data/services/product.service';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -24,7 +24,7 @@ export class ListProductsComponent implements OnInit {
   isLoadingResults = true;
 
   constructor(private productService: ProductService, private router: Router) {
-    this.displayedColumns = ['id', 'name', 'price']
+    this.displayedColumns = ['id', 'name', 'price', 'actions']
   }
 
   ngOnInit(): void {
@@ -55,6 +55,14 @@ export class ListProductsComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.router.navigate(['/product/save']);
+    this.router.navigate(['/inventory/save']);
+  }
+
+  goToDetail(index:number){
+    this.router.navigate(['/inventory/detail/' + index]);
+  }
+
+  editProduct(index:number){
+    this.router.navigate(['/inventory/save/' + index]);
   }
 }

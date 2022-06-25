@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { Product } from '@data/models/product';
 import { ApiStoreMariela } from './api-store-mariela';
 import { HistoricalPurchase } from '@data/models/historical-purchase';
@@ -34,7 +33,7 @@ export class ProductService extends ApiStoreMariela {
    * @returns save one product
    */
   saveProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl + RequestMapping.PRODUCT, product, { headers: this.header });
+    return this.http.post<Product>(this.apiUrl + RequestMapping.PRODUCT + '/save', product, { headers: this.header });
   }
 
   /**
@@ -46,13 +45,17 @@ export class ProductService extends ApiStoreMariela {
     return this.http.put<Product>(this.apiUrl + RequestMapping.PRODUCT + '/' + id, product, { headers: this.header });
   }
 
+  getProduct(id: number): Observable<Product>{
+    return this.http.get<Product>(this.apiUrl + RequestMapping.PRODUCT + '/' + id, { headers: this.header });
+  }
+
   /**
    * 
    * @param id product 
    * @returns Product with list of purchases and stock
    */
-  getProductWithStockAndPurchases(id: number): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + RequestMapping.PRODUCT +'/withStocksAndPurchases/' + id, { headers: this.header });
+  getProductWithStockAndPurchases(id: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + RequestMapping.PRODUCT +'/withStocksAndPurchases/' + id, { headers: this.header });
   }
 
   /**

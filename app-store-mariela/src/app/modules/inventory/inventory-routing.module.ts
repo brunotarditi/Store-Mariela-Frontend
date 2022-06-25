@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InventoryComponent } from './components/inventory/inventory.component';
+import { ListProductsComponent } from './components/list-products/list-products.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { SaveProductComponent } from './components/save-product/save-product.component';
 
 const routes: Routes = [
-    {path: '', component: InventoryComponent},
+  { path: '', component: ListProductsComponent },
+  { path: 'save', component: SaveProductComponent },
+  { path: 'save/:id', component: SaveProductComponent },
+  { path: 'detail/:id', component: ProductDetailComponent }
 ];
 
 @NgModule({

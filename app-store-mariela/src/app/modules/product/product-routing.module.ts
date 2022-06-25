@@ -1,13 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListProductsComponent } from './components/list-products/list-products.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { SaveProductComponent } from './components/save-product/save-product.component';
+import { StoreProductsComponent } from './components/store-products/store-products.component';
 
 const routes: Routes = [
-  { path: '', component: ListProductsComponent },
-  { path: 'save', component: SaveProductComponent },
-  { path: 'detail', component: ProductDetailComponent }
+  { path: '', component: StoreProductsComponent },
 ];
 
 @NgModule({

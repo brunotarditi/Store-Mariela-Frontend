@@ -14,7 +14,8 @@ import { ProductService } from '@data/services/product.service';
   styleUrls: ['./save-product.component.scss']
 })
 export class SaveProductComponent implements OnInit {
-  text = 'Nuevo producto'; 
+  text = 'Nuevo producto';
+  product: Product; 
   brands: Brand[];
   categories: Category[];
   id: number;
@@ -34,12 +35,12 @@ export class SaveProductComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.getBrands();
+    this.getCategories();
     this.id = this.activatedRoute.snapshot.params['id'];
     if(this.id > 0){
       this.getProductById(this.id);
     }
-    this.getBrands();
-    this.getCategories();
   }
 
   getBrands(){
@@ -50,20 +51,28 @@ export class SaveProductComponent implements OnInit {
     this.categoryService.getCategories().subscribe(data => this.categories = data);
   }
 
-  /**TODO: implements */
   getProductById(id: number): void{
+    this.productService.getProduct(id).subscribe(data => {
+      console.log(data)
+      this.productForm.setValue({
+        'id': data.id,
+        'name': data.name,
+        'brandId': data.brandId,
+        'categoryId': data.categoryId
+      })
+    });
   }
 
   postForm(form: Product):void{
     if (this.id > 0) {
       this.productService.editProduct(form, this.id).subscribe(data => {
         console.log(data);
-        this.router.navigate(['/product']);
+        this.router.navigate(['/inventory']);
       });
     }else{
       this.productService.saveProduct(form).subscribe(data => {
         console.log(data);
-        this.router.navigate(['/product']);
+        this.router.navigate(['/inventory']);
       });
     }
   }

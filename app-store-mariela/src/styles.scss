@@ -1,33 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@include mat.core();
+
+//paleta para claro
+$my-light-primary: mat.define-palette(mat.$light-blue-palette, 600);
+$my-light-accent: mat.define-palette(mat.$blue-palette, 800);
+$my-light-warning: mat.define-palette(mat.$red-palette, 500);
+
+//paleta para oscuro
+$my-dark-primary: mat.define-palette(mat.$yellow-palette, 500);
+$my-dark-accent: mat.define-palette(mat.$blue-palette, A700);
+$my-dark-warning: mat.define-palette(mat.$red-palette, 500);
+
+$my-light-theme: mat.define-light-theme((
+    color: (
+        primary: $my-light-primary,
+        accent: $my-light-accent,
+        warning: $my-light-warning
+    )
+));
+$my-dark-theme: mat.define-dark-theme((
+    color: (
+        primary: $my-dark-primary,
+        accent: $my-dark-accent,
+        warning: $my-dark-warning
+    )
+));
+
+@include mat.all-component-themes($my-light-theme);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-@import '~@angular/material/theming';
-
-@include mat-core();
-
-//paleta para claro
-$my-app-light-primary: mat-palette($mat-light-blue, 600);
-$my-app-light-accent: mat-palette($mat-blue, 800);
-$my-app-light-warning: mat-palette($mat-red, 500);
-
-//paleta para oscuro
-$my-app-dark-primary: mat-palette($mat-yellow, 500);
-$my-app-dark-accent: mat-palette($mat-blue, A700);
-$my-app-dark-warning: mat-palette($mat-red, 500);
-
-$my-app-light-theme: mat-light-theme($my-app-light-primary, $my-app-light-accent, $my-app-light-warning);
-$my-app-dark-theme:mat-dark-theme($my-app-dark-primary, $my-app-dark-accent, $my-app-dark-warning);
-@include angular-material-theme($my-app-light-theme);
 .light-theme{
-    @include angular-material-theme($my-app-light-theme);
+    @include mat.all-component-themes($my-light-theme);
     // background-color: #fff;
     color: #222;
 }
 
 .dark-theme{
-    @include angular-material-theme($my-app-dark-theme);
+    @include mat.all-component-themes($my-dark-theme);
     // background-color: #222;
     color: #fff;
 }
