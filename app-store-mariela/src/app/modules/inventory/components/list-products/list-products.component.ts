@@ -55,14 +55,14 @@ export class ListProductsComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.router.navigate(['/inventory/save']);
+    this.router.navigate(['/dashboard/inventory/save']);
   }
 
   goToDetail(index:number){
-    this.router.navigate(['/inventory/detail/' + index]);
+    this.router.navigate(['/dashboard/inventory/detail/' + index]);
   }
 
   editProduct(index:number){
-    this.router.navigate(['/inventory/save/' + index]);
+    this.router.navigate(['/dashboard/inventory/save/' + index]);
   }
 }

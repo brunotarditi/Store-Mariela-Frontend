@@ -6,13 +6,15 @@ import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from '@layout/header/header.component';
 import { SidebarComponent } from '@layout/sidebar/sidebar.component';
-import { FooterComponent } from './layout/footer/footer/footer.component';
+import { FooterComponent } from '@layout/footer/footer.component';
+import { LandingPageComponent } from './layout/landing-page/landing-page.component';
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

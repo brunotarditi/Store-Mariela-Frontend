@@ -1,15 +1,34 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { StorageService } from '@shared/services/storage.service';
 import { ThemeService } from '@shared/services/theme.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  
   @Output() drawer = new EventEmitter<any>();
   theme: boolean;
-  constructor(private themeService: ThemeService, private storageService: StorageService) { }
+  brandImage: string;
+  loginIcon: string;
+  darkIcon: string;
+  lightIcon:string;
+  dashboardIcon: string;
+  
+  constructor(
+    private themeService: ThemeService, 
+    private storageService: StorageService,
+    private router: Router
+    ) {
+      this.brandImage =  'assets/logo.png';
+      this.loginIcon = 'login';
+      this.darkIcon = 'dark_mode';
+      this.lightIcon = 'light_mode';
+      this.dashboardIcon = 'space_dashboard';
+    }
 
   ngOnInit(): void {
     this.theme = this.storageService.get('theme');
@@ -32,6 +51,10 @@ export class HeaderComponent implements OnInit {
       this.storageService.set('theme', this.theme);
       this.storageService.set('themeColor', 'dark-theme');
     }
+  }
+
+  goToDashboard(){
+    this.router.navigate(['/dashboard/admin']);
   }
 
 }

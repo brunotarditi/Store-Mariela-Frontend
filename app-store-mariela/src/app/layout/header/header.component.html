@@ -2,15 +2,18 @@
   <mat-toolbar color="primary" class="mat-elevation-z8">
     <button mat-icon-button class="example-icon" (click)="onSetDrawer()">
         <mat-icon>menu</mat-icon>
-      </button>
-    <span><img src="./../../../../assets/logo.png" class="img" alt=""></span>
+    </button>
+    <span><img [src]="brandImage" class="img" alt=""></span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon" (click)="changeMode()" title="mode">
-      <mat-icon *ngIf="theme">dark_mode</mat-icon>
-      <mat-icon *ngIf="!theme">light_mode</mat-icon>
+      <mat-icon *ngIf="theme">{{ darkIcon }}</mat-icon>
+      <mat-icon *ngIf="!theme">{{ lightIcon }}</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
+      <mat-icon>{{ dashboardIcon }}</mat-icon>
     </button>
     <button mat-icon-button class="example-icon" title="login">
-      <mat-icon>login</mat-icon>
+      <mat-icon>{{ loginIcon }}</mat-icon>
     </button>
   </mat-toolbar>
 </header>

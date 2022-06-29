@@ -14,7 +14,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.shouldRun = true;
     this.navItems = [
       { name: "Inicio", route: "home", icon: "home" },
-      { name: "Productos", route: "product", icon: "shopping_bag" },
       { name: "Inventario", route: "inventory", icon: "inventory" }
     ];
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
