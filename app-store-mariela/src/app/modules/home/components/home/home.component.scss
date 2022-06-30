@@ -1,26 +1,3 @@
-$color-dark: radial-gradient(circle at -5.87% 40.15%,#ffff3f 0, #e0ca08 50%, #786800 100%);
-$color-light: radial-gradient(circle at -5.87% 40.15%, #55ffff 0, #2f99f9 50%, #063c6a 100%);
-
-@mixin panel($background) {
-    background-image: $background;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    p {
-    color: black;
-    }
-}
 .container {
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-.panel-dark {
-    @include panel($color-dark);
-    
-}
-
-.panel-light {
-    @include panel($color-light);
+    margin: 1rem, 1rem;
 }

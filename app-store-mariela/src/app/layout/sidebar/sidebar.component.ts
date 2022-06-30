@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.shouldRun = true;
     this.navItems = [
-      { name: "Inicio", route: "home", icon: "home" },
+      { name: "Inicio", route: "admin", icon: "home" },
       { name: "Inventario", route: "inventory", icon: "inventory" }
     ];
     this.mobileQuery = media.matchMedia('(max-width: 600px)');

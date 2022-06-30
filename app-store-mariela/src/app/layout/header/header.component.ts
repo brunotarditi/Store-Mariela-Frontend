@@ -12,26 +12,35 @@ export class HeaderComponent implements OnInit {
   
   @Output() drawer = new EventEmitter<any>();
   theme: boolean;
+  dashboard: boolean;
+  isAdmin: boolean;
+  home: boolean;
   brandImage: string;
   loginIcon: string;
   darkIcon: string;
   lightIcon:string;
   dashboardIcon: string;
+  menuIcon: string;
+  homeIcon: string;
   
   constructor(
     private themeService: ThemeService, 
     private storageService: StorageService,
     private router: Router
     ) {
+      this.menuIcon = 'menu';
       this.brandImage =  'assets/logo.png';
       this.loginIcon = 'login';
       this.darkIcon = 'dark_mode';
       this.lightIcon = 'light_mode';
       this.dashboardIcon = 'space_dashboard';
+      this.homeIcon = 'home';
     }
 
   ngOnInit(): void {
     this.theme = this.storageService.get('theme');
+    this.dashboard = this.storageService.get('dashboard');
+    this.isAdmin = this.storageService.get('admin');
   }
 
   onSetDrawer(){
@@ -55,6 +64,22 @@ export class HeaderComponent implements OnInit {
 
   goToDashboard(){
     this.router.navigate(['/dashboard/admin']);
+    this.dashboard = !this.dashboard;
+    this.storageService.set('dashboard', this.dashboard);
+    this.isAdmin = !this.isAdmin;
+    this.storageService.set('admin', this.isAdmin);
+  }
+
+  goToHome(){
+    this.router.navigate(['/home']);
+    this.dashboard = !this.dashboard;
+    this.storageService.set('dashboard', this.dashboard);
+    this.isAdmin = !this.isAdmin;
+    this.storageService.set('admin', this.isAdmin);
+  }
+
+  goToLogin(): void{
+    this.router.navigate(['/auth/login']);
   }
 
 }

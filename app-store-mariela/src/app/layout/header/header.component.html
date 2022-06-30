@@ -1,18 +1,21 @@
 <header>
   <mat-toolbar color="primary" class="mat-elevation-z8">
-    <button mat-icon-button class="example-icon" (click)="onSetDrawer()">
-        <mat-icon>menu</mat-icon>
+    <button *ngIf="isAdmin" mat-icon-button class="example-icon" (click)="onSetDrawer()">
+        <mat-icon>{{ menuIcon}}</mat-icon>
     </button>
-    <span><img [src]="brandImage" class="img" alt=""></span>
+    <span><img [src]="brandImage" class="img" alt="logo" (click)="goToHome()" style="cursor: pointer;"></span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon" (click)="changeMode()" title="mode">
       <mat-icon *ngIf="theme">{{ darkIcon }}</mat-icon>
       <mat-icon *ngIf="!theme">{{ lightIcon }}</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
-      <mat-icon>{{ dashboardIcon }}</mat-icon>
+    <button *ngIf="!dashboard" mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
+      <mat-icon *ngIf="!dashboard">{{ dashboardIcon }}</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" title="login">
+    <button *ngIf="dashboard" mat-icon-button class="example-icon" title="home" (click)="goToHome()">
+      <mat-icon>{{ homeIcon }}</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" title="login" (click)="goToLogin()">
       <mat-icon>{{ loginIcon }}</mat-icon>
     </button>
   </mat-toolbar>

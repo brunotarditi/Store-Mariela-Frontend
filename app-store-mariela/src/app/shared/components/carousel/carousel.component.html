@@ -1,1 +1,18 @@
-<p>carousel works!</p>
+<div class="carousel" [ngStyle]="{'min-height': finalHeight }">
+    <div class="carousel-btns">
+        <mat-icon (click)="setBack()">arrow_back_ios</mat-icon>
+        <mat-icon (click)="setNext()">arrow_forward_ios</mat-icon>
+    </div>
+    <div class="carousel-content">
+        <ng-container *ngFor="let item of items">
+            <div class="carousel-content-item" 
+            [ngStyle]="{
+                'background-image': 'url(' + item.image + ')', 
+                'margin-left': item.marginLeft + '%' 
+            }">
+                <h1>{{ item.title?.first }}<span>{{ item.title?.second }}</span></h1>
+                <p>{{ item.subTitle }}</p>
+            </div>
+        </ng-container>
+    </div>
+</div>

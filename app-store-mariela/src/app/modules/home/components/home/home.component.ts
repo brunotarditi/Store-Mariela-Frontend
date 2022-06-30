@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CAROUSEL_DATA } from '@data/utils/carousel';
+import { CarouselItem } from '@data/utils/carousel-item';
 import { StorageService } from '@shared/services/storage.service';
 import { ThemeService } from '@shared/services/theme.service';
 
@@ -8,24 +10,10 @@ import { ThemeService } from '@shared/services/theme.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  class: string;
-  constructor(private storageService: StorageService, private themeService: ThemeService) { }
+  carousel: CarouselItem[] = CAROUSEL_DATA;
+  constructor() { }
 
   ngOnInit(): void {
-    if(this.storageService.get('theme'))
-      this.class = 'panel-dark';
-    else
-      this.class = 'panel-light';
-    this.getThemeService();
-  }
-
-  getThemeService():void{
-    this.themeService.theme$.subscribe(data => {
-      if(data == 'dark-theme')
-        this.class = 'panel-dark';
-      else
-      this.class = 'panel-light';
-    });
   }
 
 }
