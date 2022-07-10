@@ -37,3 +37,9 @@ mat-sidenav {
 .icon {
   margin-right: 10px;
 }
+
+@media screen and (max-width: 600px) {
+  .mat-list-base{
+      padding-top: 60px;
+  }
+}

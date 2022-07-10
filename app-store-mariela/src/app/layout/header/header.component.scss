@@ -10,4 +10,10 @@
 .mat-toolbar {
     position: relative;
     z-index: 2;
-  }
+}
+
+@media screen and (max-width: 392px) {
+    .img{
+        max-width: 165px;
+    }
+}

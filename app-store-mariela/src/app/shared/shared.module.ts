@@ -5,10 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import * as fromComponents from './components';
+import { TitleBottomComponent } from './components/titles/title-bottom/title-bottom.component';
 
 @NgModule({
   declarations: [
     ...fromComponents.components,
+    TitleBottomComponent,
   ],
   imports: [
     CommonModule,

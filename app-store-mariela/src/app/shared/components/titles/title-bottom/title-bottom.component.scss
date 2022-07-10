@@ -1,0 +1,14 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    position: relative;
+    z-index: 2;
+}
+
+@media screen and (max-width: 392px) {
+    span{
+        font-size: 14px;
+    }
+}

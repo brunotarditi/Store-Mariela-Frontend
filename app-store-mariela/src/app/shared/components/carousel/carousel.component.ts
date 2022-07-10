@@ -1,5 +1,5 @@
 import { AfterContentInit, Component, Input, OnInit } from '@angular/core';
-import { CarouselItem } from '@data/utils/carousel-item';
+import { CarouselItem } from '@data/utils/interfaces/carousel-item';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'app-carousel',

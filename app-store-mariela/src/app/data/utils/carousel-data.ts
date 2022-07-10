@@ -1,4 +1,4 @@
-import { CarouselItem } from "./carousel-item";
+import { CarouselItem } from "./interfaces/carousel-item";
 
 export const CAROUSEL_DATA : CarouselItem[] = [
     {

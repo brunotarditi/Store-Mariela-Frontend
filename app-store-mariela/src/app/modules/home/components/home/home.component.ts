@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CAROUSEL_DATA } from '@data/utils/carousel';
-import { CarouselItem } from '@data/utils/carousel-item';
-import { StorageService } from '@shared/services/storage.service';
-import { ThemeService } from '@shared/services/theme.service';
+import { CAROUSEL_DATA } from '@data/utils/carousel-data';
+import { CarouselItem } from '@data/utils/interfaces/carousel-item';
 
 @Component({
   selector: 'app-home',

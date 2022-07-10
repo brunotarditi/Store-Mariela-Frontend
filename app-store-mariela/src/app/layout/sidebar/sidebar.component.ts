@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { NAV_ITEM_DATA } from '@data/utils/nav-item-data';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -12,10 +13,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   navItems: any[];
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.shouldRun = true;
-    this.navItems = [
-      { name: "Inicio", route: "admin", icon: "home" },
-      { name: "Inventario", route: "inventory", icon: "inventory" }
-    ];
+    this.navItems = NAV_ITEM_DATA;
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);

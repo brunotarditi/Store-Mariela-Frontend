@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TitleH1Component implements OnInit {
 
   @Input() text = '';
-  @Input() type: 'primary' | 'secondary' | 'warning';
+  @Input() color: 'primary' | 'secondary' | 'warning';
   constructor() { }
 
   ngOnInit(): void {

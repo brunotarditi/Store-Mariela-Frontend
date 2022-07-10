@@ -33,12 +33,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .light-theme{
     @include mat.all-component-themes($my-light-theme);
-    // background-color: #fff;
     color: #222;
+    .pre-footer-separator{
+        background-color: #222;
+    }
+
+    .landing-bg{
+        background-color: #fafafa; 
+    }
 }
 
 .dark-theme{
     @include mat.all-component-themes($my-dark-theme);
-    // background-color: #222;
     color: #fff;
+    .pre-footer-separator{
+        background-color: #fff;
+    }
+    .landing-bg{
+        background-color: #303030; 
+    }
 }

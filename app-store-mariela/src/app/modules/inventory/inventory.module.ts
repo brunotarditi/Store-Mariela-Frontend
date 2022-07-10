@@ -5,6 +5,7 @@ import { ListProductsComponent } from './components/list-products/list-products.
 import { SaveProductComponent } from './components/save-product/save-product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductService } from '@data/services/product.service';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ProductService } from '@data/services/product.service';
   imports: [
     SharedModule,
     InventoryRoutingModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [ProductService]
 })

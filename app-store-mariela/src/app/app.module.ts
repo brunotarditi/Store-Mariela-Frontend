@@ -20,7 +20,8 @@ import { LandingPageComponent } from './layout/landing-page/landing-page.compone
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+   
 
     
   ],

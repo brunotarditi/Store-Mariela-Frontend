@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '@data/models/product';
 import { ApiStoreMariela } from './api-store-mariela';
 import { HistoricalPurchase } from '@data/models/historical-purchase';
-import { RequestMapping } from '@data/utils/request';
+import { RequestMapping } from '@data/utils/constants/request';
 import { HttpClient } from '@angular/common/http';
 
 const REQUEST: string = 'products';

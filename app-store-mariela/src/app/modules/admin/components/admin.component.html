@@ -1,1 +1,20 @@
-<p>admin works!</p>
+
+<section>
+    <app-title-h1 [text]="text" color="primary"></app-title-h1>
+    <div class="container">
+        <ng-container *ngFor="let info of infos;  let i = index">
+            <div class="box">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <mat-card-title>{{ info.title }}</mat-card-title>
+                        <mat-card-subtitle>{{ info.subTitle }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image [src]="info.picture" class="img" alt="Photo">
+                    <mat-card-content>
+                        <p>{{info.text}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </ng-container>
+    </div>
+</section>

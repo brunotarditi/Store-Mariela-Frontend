@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  class: string;
-
-  constructor() { }
+  brandImage: string;
+  text = 'Sitio desarrollado por Bruno Tarditi';
+  constructor() {
+    this.brandImage = 'assets/logo.png';
+  }
 
   ngOnInit(): void {
   }

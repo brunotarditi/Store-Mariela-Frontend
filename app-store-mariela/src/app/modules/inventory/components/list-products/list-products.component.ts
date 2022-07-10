@@ -13,25 +13,25 @@ import { MatSort } from '@angular/material/sort';
 })
 export class ListProductsComponent implements OnInit {
 
-  text = 'Mis productos'; 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  text = 'Mis productos';
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Product>;
+
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  resultsLength = 0;
-  isLoadingResults = true;
 
   constructor(private productService: ProductService, private router: Router) {
     this.displayedColumns = ['id', 'name', 'price', 'actions']
+    
   }
 
   ngOnInit(): void {
     this.getProducts();
   }
 
-  searchFilter(event: any) {
+  searchFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator)
@@ -41,28 +41,34 @@ export class ListProductsComponent implements OnInit {
 
   getProducts(): void {
     this.productService.getProducts().subscribe(data => {
-      this.isLoadingResults = true;
-      this.resultsLength = data.length;
       this.dataSource = new MatTableDataSource<Product>(data);
+
+      this.dataSource.filterPredicate = (data: Product,  filter: string) => {
+        return data.name.trim().toLowerCase().indexOf(filter) !== -1
+      }
       if (this.dataSource) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       }
     },
-    err => {
-      console.log(err)
-    });
+      err => {
+        console.log(err)
+      },
+      
+    );
+
+    
   }
 
   addProduct(): void {
     this.router.navigate(['/dashboard/inventory/save']);
   }
 
-  goToDetail(index:number){
+  goToDetail(index: number) {
     this.router.navigate(['/dashboard/inventory/detail/' + index]);
   }
 
-  editProduct(index:number){
+  editProduct(index: number) {
     this.router.navigate(['/dashboard/inventory/save/' + index]);
   }
 }

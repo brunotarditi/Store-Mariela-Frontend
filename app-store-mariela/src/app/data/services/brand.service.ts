@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Brand } from '@data/models/brand';
-import { RequestMapping } from '@data/utils/request';
+import { RequestMapping } from '@data/utils/constants/request';
 import { Observable } from 'rxjs';
 import { ApiStoreMariela } from './api-store-mariela';
 
