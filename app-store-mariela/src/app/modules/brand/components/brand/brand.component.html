@@ -1,1 +1,21 @@
-<p>brand works!</p>
+<button mat-mini-fab color="primary" (click)="addField()" matTooltip="Añadir nuevo campo" matTooltipPosition="right">
+    <mat-icon>add</mat-icon>
+</button>
+<mat-card class="example-card">
+    <mat-card-subtitle>Complete los campos</mat-card-subtitle>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="brandForm" (ngSubmit)="postForm(brandForm.value)">
+            <div formArrayName="names">
+                <div *ngFor="let name of brands.controls; index as i" >
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput [formControlName]="i" placeholder="Ej. Bic">
+                    </mat-form-field>
+                </div>
+                <mat-card-actions class="mt-1">
+                    <button class="example-full-width" mat-raised-button color="primary">Guardar</button>
+                </mat-card-actions>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

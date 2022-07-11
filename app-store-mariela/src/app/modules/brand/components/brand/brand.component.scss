@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+@media (max-width: 716px) {
+  .container {
+      display: flex;
+      justify-content: inherit;
+      margin: 20px;
+  }
+  mat-card {
+      width: 350px;
+  }
+}
+
+@media (max-width: 468px) {
+  .container {
+      display: flex;
+      justify-content: inherit;
+      margin: 20px;
+  }
+  mat-card {
+      width: 300px;
+  }
+}

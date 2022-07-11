@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  text = 'Detalle';
+  text = 'Detalle del producto';
   displayedColumns: string[];
   product: Product;
   stock: StockControl;
@@ -52,6 +52,11 @@ export class ProductDetailComponent implements OnInit {
         });
       }
     });
+  }
+
+  
+  goToBack(){
+    this.router.navigate(['/dashboard/inventory']);
   }
 
 }

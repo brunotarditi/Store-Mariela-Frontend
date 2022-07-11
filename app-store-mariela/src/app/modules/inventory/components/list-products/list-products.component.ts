@@ -71,4 +71,5 @@ export class ListProductsComponent implements OnInit {
   editProduct(index: number) {
     this.router.navigate(['/dashboard/inventory/save/' + index]);
   }
+
 }

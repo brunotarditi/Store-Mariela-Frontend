@@ -11,7 +11,12 @@ export const NAV_ITEM_DATA = [] = [
     },
     { 
         name: "Marcas",
-        route: "brand",
+        route: "brands",
         icon: "grade"
+    },
+    { 
+        name: "Categorías",
+        route: "categories",
+        icon: "category"
     }
 ];

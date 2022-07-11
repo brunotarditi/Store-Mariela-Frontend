@@ -1,5 +1,9 @@
 <div *ngIf="hasDetail">
     <app-title-h1 [text]="text" color="primary"></app-title-h1>
+    <button mat-icon-button class="example-icon" title="Regresar" (click)="goToBack()">
+        <mat-icon>keyboard_backspace</mat-icon>
+        Volver
+    </button>
     <div class="container" >
         <div class="col" >
             <mat-card *ngIf="product">
@@ -8,10 +12,10 @@
                 </mat-card-content>
             </mat-card>
             <mat-card *ngIf="stock">
-                <mat-card-title>Tu stock</mat-card-title>
-                <mat-card-subtitle>El mínimo es {{ stock.minimum }}.</mat-card-subtitle>
+                <mat-card-title>El stock para {{ product.name }}</mat-card-title>
+                <mat-card-subtitle>El mínimo para el producto {{ product.name }} es de {{ stock.minimum }}.</mat-card-subtitle>
                 <mat-card-content>
-                    <p>Actualmente cuentas con: </p>
+                    <p>La cantidad disponible actualmente es de: </p>
                 </mat-card-content>
                 <mat-card-actions class="content">
                     <button mat-fab color="primary" class="font">
