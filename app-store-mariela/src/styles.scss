@@ -4,25 +4,25 @@
 //paleta para claro
 $my-light-primary: mat.define-palette(mat.$light-blue-palette, 600);
 $my-light-accent: mat.define-palette(mat.$blue-palette, 800);
-$my-light-warning: mat.define-palette(mat.$red-palette, 500);
+$my-light-warning: mat.define-palette(mat.$pink-palette, 800);
 
 //paleta para oscuro
-$my-dark-primary: mat.define-palette(mat.$yellow-palette, 500);
-$my-dark-accent: mat.define-palette(mat.$blue-palette, A700);
-$my-dark-warning: mat.define-palette(mat.$red-palette, 500);
+$my-dark-primary: mat.define-palette(mat.$yellow-palette, 600);
+$my-dark-accent: mat.define-palette(mat.$deep-purple-palette, 200);
+$my-dark-warning: mat.define-palette(mat.$pink-palette, 200);
 
 $my-light-theme: mat.define-light-theme((
     color: (
         primary: $my-light-primary,
         accent: $my-light-accent,
-        warning: $my-light-warning
+        warn: $my-light-warning
     )
 ));
 $my-dark-theme: mat.define-dark-theme((
     color: (
         primary: $my-dark-primary,
         accent: $my-dark-accent,
-        warning: $my-dark-warning
+        warn: $my-dark-warning
     )
 ));
 

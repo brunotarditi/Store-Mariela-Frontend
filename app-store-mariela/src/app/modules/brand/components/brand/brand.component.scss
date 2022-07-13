@@ -1,38 +1,48 @@
 .container {
-  display: flex;
-  justify-content: center;
-  margin: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
 }
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+
+.col{
+  padding: 5px;
+  margin: 1rem 1rem;
+}
+
+@media(max-width: 600px){
+  .container{
+    grid-template-columns: 1fr;
+  }
+}
+
+table {
   width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+.actionsBtn{
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .example-full-width {
   width: 100%;
 }
-.mt-1 {
-  margin-top: 1rem;
-}
-@media (max-width: 716px) {
-  .container {
-      display: flex;
-      justify-content: inherit;
-      margin: 20px;
-  }
-  mat-card {
-      width: 350px;
-  }
+
+.mb-2{
+  margin-bottom: 2rem;
 }
 
-@media (max-width: 468px) {
-  .container {
-      display: flex;
-      justify-content: inherit;
-      margin: 20px;
-  }
-  mat-card {
-      width: 300px;
-  }
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }

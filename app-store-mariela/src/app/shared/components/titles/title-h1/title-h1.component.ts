@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class TitleH1Component implements OnInit {
   @Output() routerBack: EventEmitter<string>;
   @Input() text = '';
-  @Input() color: 'primary' | 'secondary' | 'warning';
+  @Input() color: 'primary' | 'accent' | 'warn';
   constructor(private router: Router) {
     this.routerBack = new EventEmitter();
   }

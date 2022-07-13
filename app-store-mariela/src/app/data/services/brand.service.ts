@@ -10,14 +10,14 @@ import { ApiStoreMariela } from './api-store-mariela';
 })
 export class BrandService extends ApiStoreMariela {
 
-  constructor(http: HttpClient){
+  constructor(http: HttpClient) {
     super(http);
   }
   /**
  * 
  * @returns all Brands
  */
-  getBrands(): Observable<Brand[]> {
+  getAllBrands(): Observable<Brand[]> {
     return this.http.get<Brand[]>(this.apiUrl + RequestMapping.BRAND + '/all', { headers: this.header });
   }
 
@@ -27,7 +27,16 @@ export class BrandService extends ApiStoreMariela {
    * @returns save one Brand
    */
   saveBrand(Brand: Brand): Observable<Brand> {
-    return this.http.post<Brand>(this.apiUrl + RequestMapping.BRAND , Brand, { headers: this.header });
+    return this.http.post<Brand>(this.apiUrl + RequestMapping.BRAND + "/save", Brand, { headers: this.header });
+  }
+
+  /**
+   * 
+   * @param Brand 
+   * @returns save many Brands
+   */
+  saveManyBrand(Brand: Brand[]): Observable<Brand[]> {
+    return this.http.post<Brand[]>(this.apiUrl + RequestMapping.BRAND + "/save/all", Brand, { headers: this.header });
   }
 
   /**
@@ -36,7 +45,7 @@ export class BrandService extends ApiStoreMariela {
    * @returns edit one Brand
    */
   editBrand(Brand: Brand, id: number): Observable<Brand> {
-    return this.http.put<Brand>(this.apiUrl + RequestMapping.BRAND  + '/' + id, Brand, { headers: this.header });
+    return this.http.put<Brand>(this.apiUrl + RequestMapping.BRAND + '/' + id, Brand, { headers: this.header });
   }
 
   /**
@@ -45,6 +54,6 @@ export class BrandService extends ApiStoreMariela {
  * @returns Brand with list of products
  */
   getBrandWithProduct(id: number): Observable<any> {
-    return this.http.put<any>(this.apiUrl + RequestMapping.BRAND  + '/all/' + id, { headers: this.header });
+    return this.http.put<any>(this.apiUrl + RequestMapping.BRAND + '/all/' + id, { headers: this.header });
   }
 }

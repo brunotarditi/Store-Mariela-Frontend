@@ -44,7 +44,7 @@ export class SaveProductComponent implements OnInit {
   }
 
   getBrands(){
-    this.brandService.getBrands().subscribe(data => this.brands = data);
+    this.brandService.getAllBrands().subscribe(data => this.brands = data);
   }
 
   getCategories(){
@@ -62,15 +62,13 @@ export class SaveProductComponent implements OnInit {
     });
   }
 
-  postForm(form: Product):void{
+  onSubmit(productForm: Product):void{
     if (this.id > 0) {
-      this.productService.editProduct(form, this.id).subscribe(data => {
-        console.log(data);
+      this.productService.editProduct(productForm, this.id).subscribe(data => {
         this.router.navigate(['/inventory']);
       });
     }else{
-      this.productService.saveProduct(form).subscribe(data => {
-        console.log(data);
+      this.productService.saveProduct(productForm).subscribe(data => {
         this.router.navigate(['/inventory']);
       });
     }

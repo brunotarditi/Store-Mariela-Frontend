@@ -54,11 +54,8 @@ export class ListProductsComponent implements OnInit {
       err => {
         console.log(err)
       },
-      
-    );
-
-    
-  }
+  );
+}
 
   addProduct(): void {
     this.router.navigate(['/dashboard/inventory/save']);
