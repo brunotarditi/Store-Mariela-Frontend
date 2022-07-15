@@ -14,7 +14,7 @@ const REQUEST: string = 'products';
 
 export class ProductService extends ApiStoreMariela {
 
-  constructor(http: HttpClient){
+  constructor(http: HttpClient) {
     super(http);
   }
 
@@ -45,7 +45,12 @@ export class ProductService extends ApiStoreMariela {
     return this.http.put<Product>(this.apiUrl + RequestMapping.PRODUCT + '/' + id, product, { headers: this.header });
   }
 
-  getProduct(id: number): Observable<Product>{
+  /**
+   * 
+   * @param id 
+   * @returns One product
+   */
+  getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(this.apiUrl + RequestMapping.PRODUCT + '/' + id, { headers: this.header });
   }
 
@@ -55,7 +60,7 @@ export class ProductService extends ApiStoreMariela {
    * @returns Product with list of purchases and stock
    */
   getProductWithStockAndPurchases(id: number): Observable<any> {
-    return this.http.get<any>(this.apiUrl + RequestMapping.PRODUCT +'/withStocksAndPurchases/' + id, { headers: this.header });
+    return this.http.get<any>(this.apiUrl + RequestMapping.PRODUCT + '/withStockAndPurchases/' + id, { headers: this.header });
   }
 
   /**
@@ -64,7 +69,15 @@ export class ProductService extends ApiStoreMariela {
    * @returns save one historical purchase
    */
   savePurchase(purchase: HistoricalPurchase, id: number): Observable<HistoricalPurchase> {
-    return this.http.post<HistoricalPurchase>(this.apiUrl + RequestMapping.PRODUCT +'/savePurchase/' + id, purchase, { headers: this.header });
+    return this.http.post<HistoricalPurchase>(this.apiUrl + RequestMapping.PRODUCT + '/savePurchase/' + id, purchase, { headers: this.header });
+  }
+
+  /**
+   * 
+   * @returns All product and stock is present
+   */
+  getProductWithStock(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + RequestMapping.PRODUCT + '/withStock', { headers: this.header });
   }
 
 }

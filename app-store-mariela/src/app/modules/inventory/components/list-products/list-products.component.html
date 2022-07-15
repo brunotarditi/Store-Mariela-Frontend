@@ -20,12 +20,15 @@
             </ng-container>
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
-                <td mat-cell *matCellDef="let row">{{ row.price }}</td>
+                <mat-cell *matCellDef="let row">
+                    <td *ngIf="row.price != null">{{ row.price | currency:'AR':'$':'1.2-2' }}</td>
+                    <td *ngIf="row.price == null">Sin precio</td>
+                </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-mini-fab color="warn" class="actionsBtn" (click)="goToDetail(row.id)"
+                    <button *ngIf="row.stockControl != null" mat-mini-fab color="warn" class="actionsBtn" (click)="goToDetail(row.id)"
                         matTooltip="Ver compras y stock" matTooltipPosition="above">
                         <mat-icon>filter_list</mat-icon>
                     </button>

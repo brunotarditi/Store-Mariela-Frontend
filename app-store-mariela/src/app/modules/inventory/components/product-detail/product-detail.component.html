@@ -1,10 +1,20 @@
 <div *ngIf="hasDetail">
     <app-title-h1 [text]="text" color="primary"></app-title-h1>
-    <button mat-icon-button class="example-icon" title="Regresar" (click)="goToBack()">
-        <mat-icon>keyboard_backspace</mat-icon>
-        Volver
-    </button>
-    <div class="container" >
+    <div class="container">
+        <div class="col">
+            <button mat-raised-button class="example-icon" color="accent" title="Regresar" (click)="goToBack()">
+                <mat-icon>keyboard_backspace</mat-icon>
+                Volver
+            </button>
+        </div>
+        <div class="col">
+            <button mat-raised-button class="example-icon" color="warn" title="Nueva compra" (click)="openDialog()">
+                <mat-icon>attach_money</mat-icon>
+                Nueva compra
+            </button>
+        </div>
+    </div>
+    <div class="container">
         <div class="col">
             <mat-card *ngIf="product">
                 <mat-card-title>{{ product.name }}</mat-card-title>
@@ -13,7 +23,8 @@
             </mat-card>
             <mat-card *ngIf="stock">
                 <mat-card-title>El stock para {{ product.name }}</mat-card-title>
-                <mat-card-subtitle>El mínimo para el producto {{ product.name }} es de {{ stock.minimum }}.</mat-card-subtitle>
+                <mat-card-subtitle>El mínimo para el producto {{ product.name }} es de {{ stock.minimum }}.
+                </mat-card-subtitle>
                 <mat-card-content>
                     <p>La cantidad disponible actualmente es de: </p>
                 </mat-card-content>
@@ -36,11 +47,17 @@
                 </ng-container>
                 <ng-container matColumnDef="costPrice">
                     <th mat-header-cell *matHeaderCellDef> Precio de costo </th>
-                    <td mat-cell *matCellDef="let row"> {{row.costPrice}} </td>
+                    <td mat-cell *matCellDef="let row"> {{ row.costPrice | currency:'AR':'$':'1.2-2' }} </td>
+                </ng-container>
+                <ng-container matColumnDef="createAt">
+                    <th mat-header-cell *matHeaderCellDef> Fecha de compra </th>
+                    <td mat-cell *matCellDef="let row"> {{ row.createAt | date: 'dd/MM/yyyy' }} </td>
                 </ng-container>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <mat-paginator [pageSizeOptions]="pageSizeOptions" aria-label="Seleccione la página de productos">
+            </mat-paginator>
         </div>
     </div>
 </div>

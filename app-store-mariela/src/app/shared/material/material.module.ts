@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [],
   imports: [
@@ -34,6 +35,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatGridListModule,
+    MatDialogModule
   ],
   exports:[
     MatSidenavModule,
@@ -51,7 +53,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule
+
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}]
 })
