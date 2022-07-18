@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '@data/models/product';
 import { ProductService } from '@data/services/product.service';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogFormStockComponent } from '../dialog-form-stock/dialog-form-stock.component';
 
 @Component({
   selector: 'app-list-products',
@@ -13,7 +15,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class ListProductsComponent implements OnInit {
 
-  text = 'Mis productos';
+  text = 'Inventario de mis productos';
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
@@ -22,7 +24,10 @@ export class ListProductsComponent implements OnInit {
 
   pageSizeOptions: number[] = [5, 10, 25, 100];
 
-  constructor(private productService: ProductService, private router: Router) {
+  constructor(
+    private productService: ProductService, 
+    private router: Router, 
+    public dialog: MatDialog) {
     this.displayedColumns = ['id', 'name', 'price', 'actions']
     
   }
@@ -40,10 +45,9 @@ export class ListProductsComponent implements OnInit {
 
 
   getProducts(): void {
-    this.productService.getProducts().subscribe(data => {
-      this.dataSource = new MatTableDataSource<Product>(data);
-
-      this.dataSource.filterPredicate = (data: Product,  filter: string) => {
+    this.productService.getProductWithStock().subscribe(data => {
+      this.dataSource = new MatTableDataSource<Product>(data.Products);
+      this.dataSource.filterPredicate = (data: any,  filter: string) => {
         return data.name.trim().toLowerCase().indexOf(filter) !== -1
       }
       if (this.dataSource) {
@@ -67,6 +71,14 @@ export class ListProductsComponent implements OnInit {
 
   editProduct(index: number) {
     this.router.navigate(['/dashboard/inventory/save/' + index]);
+  }
+
+  goToDialogForm(index: number){
+    this.dialog.open(DialogFormStockComponent, {
+      data: {
+        id: index 
+      }
+    });
   }
 
 }

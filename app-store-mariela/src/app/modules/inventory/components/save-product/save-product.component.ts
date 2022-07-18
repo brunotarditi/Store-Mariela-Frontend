@@ -53,7 +53,6 @@ export class SaveProductComponent implements OnInit {
 
   getProductById(id: number): void{
     this.productService.getProduct(id).subscribe(data => {
-      console.log(data)
       this.productForm.setValue({
         'name': data.name,
         'brandId': data.brandId,

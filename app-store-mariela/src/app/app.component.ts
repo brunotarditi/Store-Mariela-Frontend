@@ -25,10 +25,11 @@ export class AppComponent implements OnInit {
   }
 
   getThemeService():void{
-    const overlay = this.overlayContainer.getContainerElement().classList;
+    this.overlayContainer.getContainerElement().classList.add(this.componentCssClass);
     this.themeService.theme$.subscribe(data => {
-      if (overlay.contains(this.theme)) {
-        overlay.remove(this.theme);
+    const overlay = this.overlayContainer.getContainerElement().classList
+      if (overlay.contains(this.componentCssClass)) {
+        overlay.remove(this.componentCssClass);
       }
       overlay.add(data);
       this.theme = data;

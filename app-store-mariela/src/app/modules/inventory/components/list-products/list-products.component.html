@@ -20,17 +20,28 @@
             </ng-container>
             <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
-                <mat-cell *matCellDef="let row">
-                    <td *ngIf="row.price != null">{{ row.price | currency:'AR':'$':'1.2-2' }}</td>
-                    <td *ngIf="row.price == null">Sin precio</td>
-                </mat-cell>
+                <td mat-cell *matCellDef="let row">
+                    <div *ngIf="row.price != null">
+                        {{ row.price | currency:'AR':'$':'1.2-2' }}
+                    </div>
+                    <div *ngIf="row.price == null">
+                        <button mat-icon-button class="actionsBtn" matTooltip="Sin precio"
+                            matTooltipPosition="above">
+                            <mat-icon>info</mat-icon>
+                        </button>
+                    </div>
+                </td>
             </ng-container>
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
                 <td mat-cell *matCellDef="let row">
-                    <button *ngIf="row.stockControl != null" mat-mini-fab color="warn" class="actionsBtn" (click)="goToDetail(row.id)"
-                        matTooltip="Ver compras y stock" matTooltipPosition="above">
+                    <button *ngIf="row.stockControl != null" mat-mini-fab color="warn" class="actionsBtn"
+                        (click)="goToDetail(row.id)" matTooltip="Ver compras y stock" matTooltipPosition="above">
                         <mat-icon>filter_list</mat-icon>
+                    </button>
+                    <button *ngIf="row.stockControl == null" mat-mini-fab color="accent" class="actionsBtn"
+                        (click)="goToDialogForm(row.id)" matTooltip="Nueva compra de stock" matTooltipPosition="above">
+                        <mat-icon>local_mall</mat-icon>
                     </button>
                     <button mat-mini-fab color="primary" class="actionsBtn" (click)="editProduct(row.id)"
                         matTooltip="Editar producto" matTooltipPosition="above">
