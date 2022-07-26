@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'auth', loadChildren: () => import('@modules/auth/auth.module').then(m => m.AuthModule) },
       { path: 'brands', loadChildren: () => import('@modules/brand/brand.module').then(m => m.BrandModule) },
       { path: 'categories', loadChildren: () => import('@modules/category/category.module').then(m => m.CategoryModule) },
-
+      { path: 'orders', loadChildren: () => import('@modules/order/order.module').then(m => m.OrderModule) },
     ]
   },
   {

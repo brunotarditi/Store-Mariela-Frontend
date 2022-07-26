@@ -1,0 +1,20 @@
+<div class="cart">
+    <mat-stepper linear #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Carrito de la compra</ng-template>
+            <app-cart #stepOne></app-cart>
+        </mat-step>
+        <mat-step [stepControl]="form1">
+            <ng-template matStepLabel>Proceso de pago</ng-template>
+            <app-payment #stepTwo></app-payment>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Finalizar</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

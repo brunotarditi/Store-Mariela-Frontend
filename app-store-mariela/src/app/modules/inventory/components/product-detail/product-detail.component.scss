@@ -29,3 +29,25 @@ table.mat-table {
   display: flex;
   justify-content: center;
 }
+
+mat-card-title{
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-subtitle{
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+mat-card-content{
+  display: flex;
+  justify-content: center;
+}
+
+.minimum {
+  padding-left: 0.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+}

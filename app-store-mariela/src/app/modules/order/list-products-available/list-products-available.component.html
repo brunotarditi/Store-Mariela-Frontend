@@ -1,0 +1,40 @@
+<mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="searchFilter($event)" placeholder="Ejemplo. Lápiz" #input autocomplete="off">
+</mat-form-field>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+            <td mat-cell *matCellDef="let row">
+                <div *ngIf="row.price != null">
+                    {{ row.price | currency:'AR':'$':'1.2-2' }}
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Agregar a carrito</th>
+            <td mat-cell *matCellDef="let row">
+                <button (click)="addToCart(row)" mat-mini-fab color="primary" class="actionsBtn"
+                    matTooltip="Ver compras y stock" matTooltipPosition="above">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="pageSizeOptions" aria-label="Seleccione la página de productos">
+    </mat-paginator>
+</div>

@@ -8,7 +8,7 @@
             </button>
         </div>
         <div class="col">
-            <button mat-raised-button class="example-icon" color="warn" title="Nueva compra" (click)="openDialog()">
+            <button mat-raised-button class="example-icon" color="warn" title="Nueva compra" (click)="openDialog(id)">
                 <mat-icon>attach_money</mat-icon>
                 Nueva compra
             </button>
@@ -23,10 +23,10 @@
             </mat-card>
             <mat-card *ngIf="stock">
                 <mat-card-title>El stock para {{ product.name }}</mat-card-title>
-                <mat-card-subtitle>El mínimo para el producto {{ product.name }} es de {{ stock.minimum }}.
+                <mat-card-subtitle>El mínimo para el producto {{ product.name }} es de <span class="minimum">{{ stock.minimum }}</span>.
                 </mat-card-subtitle>
                 <mat-card-content>
-                    <p>La cantidad disponible actualmente es de: </p>
+                    <p>La cantidad disponible actualmente es</p>
                 </mat-card-content>
                 <mat-card-actions class="content">
                     <button mat-fab color="primary" class="font">

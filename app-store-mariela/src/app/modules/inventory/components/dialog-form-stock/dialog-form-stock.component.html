@@ -2,15 +2,33 @@
 <div class="example-container">
     <form class="example-form" [formGroup]="purchaseStockForm" (ngSubmit)="onSubmit()">
         <div mat-dialog-content>
-            <mat-form-field appearance="fill">
-                <mat-label>Cantidad</mat-label>
-                <input formControlName="quantity" (keypress)="onlyNumber($event)" matInput class="example-right-align" autocomplete="off">
-            </mat-form-field>
-            <mat-form-field appearance="fill" >
-                <mat-label>Precio de costo</mat-label>
-                <input formControlName="costPrice" type="number" matInput placeholder="0" class="example-right-align" autocomplete="off">
-                <span matPrefix>$&nbsp;</span>
-            </mat-form-field>
+            <div class="row">
+                <div class="col-2">
+                    <mat-checkbox formControlName="hasIva">¿Iva incluído?</mat-checkbox>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Precio de costo</mat-label>
+                        <input formControlName="costPrice" numberOnly [allowDecimals]="true" matInput placeholder="0" class="example-right-align" autocomplete="off">
+                        <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cantidad</mat-label>
+                        <input formControlName="quantity" numberOnly [allowDecimals]="false" matInput class="example-right-align" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Stock mínimo</mat-label>
+                        <input formControlName="minimum" numberOnly [allowDecimals]="false" matInput class="example-right-align" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Porcentaje de aumento</mat-label>
+                        <input formControlName="percent" numberOnly [allowDecimals]="false" matInput class="example-right-align" autocomplete="off">
+                        <span matPrefix>%&nbsp;</span>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
         <div mat-dialog-actions>
             <button mat-raised-button class="example-full-width" color="accent">Guardar</button>

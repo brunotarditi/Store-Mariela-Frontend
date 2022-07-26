@@ -5,6 +5,7 @@ import { ApiStoreMariela } from './api-store-mariela';
 import { HistoricalPurchase } from '@data/models/historical-purchase';
 import { RequestMapping } from '@data/utils/constants/request';
 import { HttpClient } from '@angular/common/http';
+import { PurchaseStock } from '@data/models/purchase-stock';
 
 const REQUEST: string = 'products';
 
@@ -68,8 +69,8 @@ export class ProductService extends ApiStoreMariela {
    * @param purchase 
    * @returns save one historical purchase
    */
-  savePurchase(purchase: HistoricalPurchase, id: number): Observable<HistoricalPurchase> {
-    return this.http.post<HistoricalPurchase>(this.apiUrl + RequestMapping.PRODUCT + '/savePurchase/' + id, purchase, { headers: this.header });
+  savePurchase(purchase: PurchaseStock, id: number): Observable<PurchaseStock> {
+    return this.http.post<PurchaseStock>(this.apiUrl + RequestMapping.PRODUCT + '/savePurchase/' + id, purchase, { headers: this.header });
   }
 
   /**

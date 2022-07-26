@@ -9,6 +9,7 @@ import { ProductService } from '@data/services/product.service';
 import Swal from 'sweetalert2';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { DialogFormStockComponent } from '../dialog-form-stock/dialog-form-stock.component';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -39,9 +40,9 @@ export class ProductDetailComponent implements OnInit {
     this.getProductWithStockAndPurchases(this.id);
   }
 
-  getProductWithStockAndPurchases(id: number):void {
+  getProductWithStockAndPurchases(id: number): void {
     this.productService.getProductWithStockAndPurchases(id).subscribe(data => {
-      console.log(data.Stock instanceof Object);
+      console.log(data)
       if (data.Stock instanceof Object) {
         this.hasDetail = true;
         this.product = data.Product;
@@ -51,7 +52,7 @@ export class ProductDetailComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }
         this.stock = data.Stock;
-      }else{
+      } else {
         Swal.fire({
           icon: 'question',
           title: 'Este producto no registra compras ni stock.',
@@ -65,12 +66,17 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  
-  goToBack():void{
+
+  goToBack(): void {
     this.router.navigate(['/dashboard/inventory']);
   }
 
-  openDialog():void{
+  openDialog(index: number): void {
+    this.dialog.open(DialogFormStockComponent, {
+      data: {
+        id: index
+      }
+    });
   }
 
 }
