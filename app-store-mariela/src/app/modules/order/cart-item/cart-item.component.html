@@ -1,0 +1,18 @@
+    <div class="boxes mat-elevation-z8">
+        <div class="box">
+            <p>{{ cartItemModel.productName }}</p>
+        </div>
+        <div class="box">
+            <p>
+                unidades: <span class="bold">{{ cartItemModel.productQuantity }}</span> x
+                <span class="bold">{{ cartItemModel.productPrice |
+                    currency:'AR':'$':'1.2-2'}}</span>
+            </p>
+        </div>
+        <div class="box">
+            <p>
+                subtotal: <span class="bold"> {{ cartItemModel.productQuantity * cartItemModel.productPrice |
+                    currency:'AR':'$':'1.2-2'}}</span>
+            </p>
+        </div>
+    </div>

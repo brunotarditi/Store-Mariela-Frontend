@@ -16,7 +16,7 @@ import * as fromComponents from './components';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
     CommonModule,

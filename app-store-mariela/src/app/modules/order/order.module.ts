@@ -8,6 +8,7 @@ import { StepsProcessComponent } from './steps-process/steps-process.component';
 import { ListProductsAvailableComponent } from './list-products-available/list-products-available.component';
 import { CartComponent } from './cart/cart.component';
 import { PaymentComponent } from './payment/payment.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PaymentComponent } from './payment/payment.component';
     StepsProcessComponent,
     ListProductsAvailableComponent,
     CartComponent,
-    PaymentComponent
+    PaymentComponent,
+    CartItemComponent
   ],
   imports: [
     SharedModule,

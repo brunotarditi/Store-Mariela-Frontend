@@ -1,10 +1,37 @@
 <form [formGroup]="frmStepTwo">
-    <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="name" placeholder="Ex. 1 Main St, New York, NY" required>
-    </mat-form-field>
-    <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    <div class="container">
+            <label>El cliente abona con: </label>
+            <mat-radio-group class="example-radio-group" formControlName="payMethod">
+                <mat-radio-button class="example-radio-button" (change)="capturePaymentMethod($event)" *ngFor="let method of payMethods" [value]="method">{{method}}</mat-radio-button>
+            </mat-radio-group>
+    </div>
+    <div class="container" *ngIf="isCash">
+            <mat-form-field appearance="fill">
+                <mat-label>Cantidad de efectivo</mat-label>
+                <input matInput formControlName="cash" (blur)="calculateMoneyBack()" numberOnly [allowDecimals]="true" placeholder="100, por ejemplo">
+                <span matPrefix>$&nbsp;</span>
+            </mat-form-field>
+    </div>
+    <div class="card-money-back" *ngIf="isCash && hereYourMoney">
+        <div class="card-money-back-body mat-elevation-z8">
+            <p>El vuelto es: {{ moneyBack | currency:'AR':'$':'1.2-2'}}</p>
+        </div>
+    </div>
+    <div class="card-money-back" *ngIf="isCash && errMoney">
+        <div class="card-money-back-body mat-elevation-z8">
+            <p>{{ errMsg }}</p>
+        </div>
+    </div>
+    <div class="card-total">
+        <div class="card-total-body mat-elevation-z8">
+            <p>TOTAL: {{ total | currency:'AR':'$':'1.2-2'}}</p>
+        </div>
+    </div>
+    <p> </p>
+    <div class="btn-right">
+        <div class="example-button-row">
+            <button mat-button mat-raised-button matStepperPrevious color="warn">Volver</button>
+            <button mat-raised-button matStepperNext color="accent" [disabled]="!next">Finalizar</button>
+        </div>
     </div>
 </form>

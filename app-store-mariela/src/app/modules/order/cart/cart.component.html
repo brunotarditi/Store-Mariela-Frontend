@@ -1,5 +1,32 @@
-<p>product name: <strong>quantity</strong> units: <strong>price:</strong></p>
-<div>
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-button matStepperNext>Next</button>
+<div *ngIf="cartItems.length < 1">
+    <button class="emptyCart" mat-stroked-button [disabled]="true">
+        <mat-icon>production_quantity_limits</mat-icon> El carrito está vacío
+    </button>
+</div>
+<div *ngIf="cartItems.length > 0">
+    <div *ngIf="cartItems.length > 0">
+        <button class="emptyCart" mat-raised-button color="warn" (click)="emptyCart()">
+            <mat-icon>remove_circle</mat-icon> Vaciar carrito
+        </button>
+    </div>
+    <div *ngFor="let item of cartItems; index as i">
+        <div class="container">
+            <div class="col col-2">
+                <app-cart-item [cartItemModel]="item"></app-cart-item>
+            </div>
+            <div class="col">
+                <button mat-mini-fab color="primary" aria-label="Delete item" (click)="deleteItem(i)">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-total">
+        <div class="card-total-body mat-elevation-z8">
+            <p>TOTAL: {{ getTotal() | currency:'AR':'$':'1.2-2'}}</p>
+        </div>
+    </div>
+</div>
+<div class="btn-right" *ngIf="cartItems.length > 0">
+    <button mat-raised-button matStepperNext color="accent">Siguiente</button>
 </div>

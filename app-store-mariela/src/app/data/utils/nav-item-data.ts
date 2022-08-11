@@ -18,5 +18,10 @@ export const NAV_ITEM_DATA = [] = [
         name: "Categorías",
         route: "categories",
         icon: "category"
+    },
+    { 
+        name: "Ordenes",
+        route: "orders",
+        icon: "shopping_bag"
     }
 ];

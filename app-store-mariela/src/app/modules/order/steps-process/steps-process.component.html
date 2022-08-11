@@ -1,19 +1,18 @@
-<div class="cart">
+<div class="cart mat-elevation-z8">
     <mat-stepper linear #stepper>
-        <mat-step>
+        <mat-step [completed]="isCompleted">
             <ng-template matStepLabel>Carrito de la compra</ng-template>
-            <app-cart #stepOne></app-cart>
+            <app-cart #stepOne ></app-cart>
         </mat-step>
-        <mat-step [stepControl]="form1">
+        <mat-step [stepControl]="form2">
             <ng-template matStepLabel>Proceso de pago</ng-template>
             <app-payment #stepTwo></app-payment>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Finalizar</ng-template>
-            <p>You are now done.</p>
+            <p>La compra ha finalizado.</p>
             <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
+                <button mat-button (click)="cleanCart(stepper)">Limpiar carrito</button>
             </div>
         </mat-step>
     </mat-stepper>

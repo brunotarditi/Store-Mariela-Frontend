@@ -16,8 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatGridListModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
   ],
   exports:[
     MatSidenavModule,
@@ -61,7 +63,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatGridListModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatStepperModule
+    MatStepperModule,
+    MatRadioModule
 
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}]

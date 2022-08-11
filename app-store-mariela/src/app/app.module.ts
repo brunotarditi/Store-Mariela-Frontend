@@ -24,7 +24,6 @@ registerLocaleData(localeEs);
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
-
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'ar-AR'}

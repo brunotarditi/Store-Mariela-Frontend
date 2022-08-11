@@ -1,0 +1,39 @@
+.container {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.col {
+    text-align: center;
+}
+
+.card-total {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-total-body {
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-top: 5px;
+    text-align: center;
+    background-color: #d75281;
+    border-radius: 4px;
+}
+.btn-right {
+    text-align: right;
+}
+
+.emptyCart {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+

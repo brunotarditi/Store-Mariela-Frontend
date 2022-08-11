@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Product } from '@data/models/product';
 import { MessageService } from '@data/services/message.service';
 import { ProductService } from '@data/services/product.service';
+import { DataService } from '@shared/services/data.service';
 
 @Component({
   selector: 'app-list-products-available',
@@ -21,7 +22,8 @@ export class ListProductsAvailableComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10, 25, 100];
   constructor(
     private productService: ProductService, 
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dataService: DataService
     ) {
     this.displayedColumns = ['id', 'name', 'price', 'actions']
   }
@@ -31,7 +33,7 @@ export class ListProductsAvailableComponent implements OnInit {
   }
 
   addToCart(product: Product):void{
-    console.log(product);
+    this.dataService.isCompleted$.emit(true);
     this.messageService.sendMessage(product);
   }
 

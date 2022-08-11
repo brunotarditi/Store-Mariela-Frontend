@@ -1,0 +1,21 @@
+.bold{
+    font-weight: 600;
+}
+
+.boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    border: 1px dotted #5FD068;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.box{
+    font-size: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 5px;
+}
+
+

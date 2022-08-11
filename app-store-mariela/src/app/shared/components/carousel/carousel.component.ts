@@ -24,9 +24,9 @@ export class CarouselComponent implements OnInit {
       elem.id = index;
       elem.marginLeft = 0;
     });
-    setInterval(() => {
-      this.setNext()
-    }, 3000)
+    // setInterval(() => {
+    //   this.setNext()
+    // }, 3000)
   }
 
   setNext(): void{
