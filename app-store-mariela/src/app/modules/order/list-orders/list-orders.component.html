@@ -1,0 +1,50 @@
+<app-title-h1 [text]="text" color="primary"></app-title-h1>
+<div class="container">
+    <button mat-mini-fab color="primary" (click)="addOrder()" matTooltip="Añadir nuevo pedido"
+        matTooltipPosition="right">
+        <mat-icon>add</mat-icon>
+    </button>
+    <div class="mat-elevation-z8 mt-2">
+        <table #myTable mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+            </ng-container>
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef>Total</th>
+                <td mat-cell *matCellDef="let row">{{ row.total }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let row">
+                    <div [ngSwitch]="row.status">
+                        <div *ngSwitchCase="'NEW_ORDER'">Nuevo</div>
+                        <div *ngSwitchCase="'DENY'">Denegado</div>
+                        <div *ngSwitchCase="'OK'">Aceptado</div>
+                        <div *ngSwitchCase="'PREPARATION'">Pendiente</div>
+                        <div *ngSwitchCase="'CANCELLED'">Cancelado</div>
+                        <div *ngSwitchCase="'DELIVERED'">Pagado y entregado</div>
+                        <div *ngSwitchDefault>Sin estado</div>
+                    </div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-mini-fab color="warn" class="actionsBtn" (click)="addDetail(row.id)"
+                        matTooltip="Agregar productos al pedido" matTooltipPosition="above">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="warn" class="actionsBtn" (click)="goToDetail(row.id)"
+                        matTooltip="Ver detalle del pedido" matTooltipPosition="above">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" aria-label="Seleccione la página de productos">
+        </mat-paginator>
+    </div>
+</div>

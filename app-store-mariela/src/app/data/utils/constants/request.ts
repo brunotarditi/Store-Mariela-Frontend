@@ -1,5 +1,6 @@
 export enum RequestMapping {
     PRODUCT = 'products',
     BRAND = 'brands',
-    CATEGORY = 'categories'
+    CATEGORY = 'categories',
+    ORDER = 'orders'
 }

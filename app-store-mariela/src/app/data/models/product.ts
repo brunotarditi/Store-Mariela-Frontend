@@ -9,4 +9,5 @@ export interface Product {
     stockControl: StockControl;
     creatAt: Date;
     updateAt: Date;
+    isDelete: boolean;
 }

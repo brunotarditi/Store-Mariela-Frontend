@@ -9,17 +9,26 @@ import { ApiStoreMariela } from './api-store-mariela';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends ApiStoreMariela{
+export class CategoryService extends ApiStoreMariela {
 
-  constructor(http: HttpClient){
+  constructor(http: HttpClient) {
     super(http);
   }
   /**
  * 
  * @returns all Categories
  */
-  getCategories(): Observable<Category[]> {
+  getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.apiUrl + RequestMapping.CATEGORY + '/all', { headers: this.header });
+  }
+
+  /**
+  * 
+  * @param category 
+  * @returns save one category
+  */
+  saveProduct(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.apiUrl + RequestMapping.CATEGORY + '/save', category, { headers: this.header });
   }
 
 }

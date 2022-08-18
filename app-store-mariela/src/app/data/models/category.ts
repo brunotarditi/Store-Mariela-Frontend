@@ -3,4 +3,5 @@ export interface Category {
     name: string;
     creatAt: Date;
     updateAt: Date;
+    isDelete: boolean;
 }

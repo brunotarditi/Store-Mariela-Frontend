@@ -9,6 +9,7 @@ import { ListProductsAvailableComponent } from './list-products-available/list-p
 import { CartComponent } from './cart/cart.component';
 import { PaymentComponent } from './payment/payment.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { ListOrdersComponent } from './list-orders/list-orders.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     ListProductsAvailableComponent,
     CartComponent,
     PaymentComponent,
-    CartItemComponent
+    CartItemComponent,
+    ListOrdersComponent
   ],
   imports: [
     SharedModule,

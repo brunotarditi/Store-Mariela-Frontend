@@ -1,6 +1,7 @@
-export interface Brand {
+export interface Order {
     id: number;
-    name: string;
+    total: number;
+    status: number;
     creatAt: Date;
     updateAt: Date;
     isDelete: boolean;

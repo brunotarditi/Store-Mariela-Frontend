@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '@data/models/product';
 import { ApiStoreMariela } from './api-store-mariela';
-import { HistoricalPurchase } from '@data/models/historical-purchase';
 import { RequestMapping } from '@data/utils/constants/request';
 import { HttpClient } from '@angular/common/http';
 import { PurchaseStock } from '@data/models/purchase-stock';
-
-const REQUEST: string = 'products';
 
 @Injectable({
   providedIn: 'root'

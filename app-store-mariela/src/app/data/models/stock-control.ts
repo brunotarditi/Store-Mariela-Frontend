@@ -5,4 +5,5 @@ export interface StockControl {
     percent: number;
     creatAt: Date;
     updateAt: Date;
+    isDelete: boolean;
 }
