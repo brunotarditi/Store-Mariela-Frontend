@@ -44,11 +44,11 @@ export class SaveProductComponent implements OnInit {
   }
 
   getBrands(){
-    this.brandService.getAllBrands().subscribe(data => this.brands = data);
+    this.brandService.getAllBrandsEnabled().subscribe(data => this.brands = data);
   }
 
   getCategories(){
-    this.categoryService.getCategories().subscribe(data => this.categories = data);
+    this.categoryService.getAllCategoriesEnabled().subscribe(data => this.categories = data);
   }
 
   getProductById(id: number): void{

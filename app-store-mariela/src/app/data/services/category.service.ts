@@ -14,6 +14,7 @@ export class CategoryService extends ApiStoreMariela {
   constructor(http: HttpClient) {
     super(http);
   }
+
   /**
  * 
  * @returns all Categories
@@ -27,8 +28,44 @@ export class CategoryService extends ApiStoreMariela {
   * @param category 
   * @returns save one category
   */
-  saveProduct(category: Category): Observable<Category> {
+  saveCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(this.apiUrl + RequestMapping.CATEGORY + '/save', category, { headers: this.header });
+  }
+
+  /**
+   * 
+   * @param id 
+   * @param category 
+   * @returns edit one category
+   */
+  editCategory(id:number, category: Category): Observable<Category> {
+    return this.http.put<Category>(this.apiUrl + RequestMapping.CATEGORY + '/' + id, category, { headers: this.header });
+  }
+
+  /**
+  * 
+  * @param id
+  * @returns delete one category
+  */
+  deleteCategory(id:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + RequestMapping.CATEGORY + '/delete/' + id, { headers: this.header });
+  }
+
+  /**
+ * 
+ * @returns all Categories
+ */
+  getAllCategoriesEnabled(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiUrl + RequestMapping.CATEGORY + '/allEnabled', { headers: this.header });
+  }
+
+  /**
+   * 
+   * @param id 
+   * @returns One category
+   */
+  getCategory(id: number): Observable<Category> {
+    return this.http.get<Category>(this.apiUrl + RequestMapping.CATEGORY + '/' + id, { headers: this.header });
   }
 
 }

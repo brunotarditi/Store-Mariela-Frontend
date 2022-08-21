@@ -47,6 +47,10 @@
                         matTooltip="Editar producto" matTooltipPosition="above">
                         <mat-icon>edit</mat-icon>
                     </button>
+                    <button mat-mini-fab color="warn" class="actionsBtn" (click)="onDelete(row.id)"
+                        matTooltip="Eliminar producto" matTooltipPosition="above">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

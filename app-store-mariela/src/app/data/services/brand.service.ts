@@ -44,7 +44,7 @@ export class BrandService extends ApiStoreMariela {
    * @param Brand 
    * @returns edit one Brand
    */
-  editBrand(Brand: Brand, id: number): Observable<Brand> {
+  editBrand(id: number, Brand: Brand): Observable<Brand> {
     return this.http.put<Brand>(this.apiUrl + RequestMapping.BRAND + '/' + id, Brand, { headers: this.header });
   }
 
@@ -55,5 +55,31 @@ export class BrandService extends ApiStoreMariela {
  */
   getBrandWithProduct(id: number): Observable<any> {
     return this.http.put<any>(this.apiUrl + RequestMapping.BRAND + '/all/' + id, { headers: this.header });
+  }
+
+  /**
+  * 
+  * @param id
+  * @returns delete one brand
+  */
+  deleteBrand(id:number): Observable<any> {
+    return this.http.delete<any>(this.apiUrl + RequestMapping.BRAND + '/delete/' + id, { headers: this.header });
+  }
+
+  /**
+ * 
+ * @returns all Brands
+ */
+  getAllBrandsEnabled(): Observable<Brand[]> {
+    return this.http.get<Brand[]>(this.apiUrl + RequestMapping.BRAND + '/allEnabled', { headers: this.header });
+  }
+
+  /**
+   * 
+   * @param id 
+   * @returns One brand
+   */
+  getBrand(id: number): Observable<Brand> {
+    return this.http.get<Brand>(this.apiUrl + RequestMapping.BRAND + '/' + id, { headers: this.header });
   }
 }

@@ -4,6 +4,7 @@ import { BrandComponent } from './components/brand/brand.component';
 
 const routes: Routes = [
   { path: '', component: BrandComponent },
+  { path: ':id', component: BrandComponent },
 ];
 
 @NgModule({

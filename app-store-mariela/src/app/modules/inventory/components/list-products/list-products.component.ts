@@ -81,4 +81,13 @@ export class ListProductsComponent implements OnInit {
     });
   }
 
+  onDelete(id:number){
+    this.productService.deleteProduct(id).subscribe(data => {
+      console.log(data)
+    },
+    err => {
+      console.log(err)
+    })
+  }
+
 }

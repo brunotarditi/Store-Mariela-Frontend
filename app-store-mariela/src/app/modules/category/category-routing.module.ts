@@ -4,6 +4,7 @@ import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   { path: '', component: CategoryComponent },
+  { path: ':id', component: CategoryComponent },
 ];
 
 @NgModule({

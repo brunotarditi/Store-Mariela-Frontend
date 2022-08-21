@@ -78,4 +78,13 @@ export class ProductService extends ApiStoreMariela {
     return this.http.get<any>(this.apiUrl + RequestMapping.PRODUCT + '/withStock', { headers: this.header });
   }
 
+  /**
+  * 
+  * @param id
+  * @returns delete one product
+  */
+  deleteProduct(id:number): Observable<Product> {
+    return this.http.delete<Product>(this.apiUrl + RequestMapping.PRODUCT + '/delete/' + id, { headers: this.header });
+  }
+
 }

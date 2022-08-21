@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '@data/models/category';
 import { CategoryService } from '@data/services/category.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-category',
@@ -21,18 +23,25 @@ export class CategoryComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<Category>;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  brandForm = new FormGroup({
-    names: new FormArray([
-      new FormControl('', Validators.required)
-    ])
+  
+  id: number;
+  categoryForm = new FormGroup({
+    name : new FormControl('', Validators.required),
   });
-  constructor(private categoryService: CategoryService) {
+
+  constructor(
+    private categoryService: CategoryService, 
+    private router: Router, 
+    private activatedRoute: ActivatedRoute) {
     this.displayedColumns = ['id', 'name', 'actions'];
   }
 
   ngOnInit(): void {
-    this.getBrands();
+    this.getCategories();
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if(this.id > 0){
+      this.getCategoryById(this.id);
+    }
   }
 
   searchFilter(event: Event) {
@@ -42,8 +51,8 @@ export class CategoryComponent implements OnInit {
       this.dataSource.paginator.firstPage();
   }
 
-  getBrands(): void {
-    this.categoryService.getAllCategories().subscribe(data => {
+  getCategories(): void {
+    this.categoryService.getAllCategoriesEnabled().subscribe(data => {
       this.dataSource = new MatTableDataSource<Category>(data);
 
       this.dataSource.filterPredicate = (data: Category, filter: string) => {
@@ -60,29 +69,74 @@ export class CategoryComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    const formBrand = this.brandForm.controls.names.value.map((data: any) => {
-      return {
-        name: data
-      }
+  onSubmit(category: Category) {
+    if (this.id > 0) {
+      this.categoryService.editCategory(this.id, category).subscribe(data => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Categoria editada.',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/dashboard/categories'])
+          }
+        });
+      })
+    } else {
+      this.categoryService.saveCategory(category).subscribe(data => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Categoria guardada.',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      });
+    }
+  }
+
+  onEdit(id:number){
+    this.router.navigate(['/dashboard/categories/' + id]);
+    
+  }
+
+  getCategoryById(id:number){
+    this.categoryService.getCategory(id).subscribe(data => {
+      this.categoryForm.setValue({
+        'name': data.name,
+      })
+    });
+  }
+
+  onDelete(id:number){
+    this.categoryService.deleteCategory(id).subscribe(data => {
+      console.log(data)
+      Swal.fire({
+        icon: 'success',
+        title: data.message,
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
+    },
+    err => {
+      console.log(err)
+      Swal.fire({
+        icon: 'error',
+        title: err.error.message,
+        confirmButtonText: 'Volver'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/dashboard/categories'])
+        }
+      });
     })
-    // if (formBrand.length == 1) {
-    //   this.categoryService.saveBrand(formBrand[0]).subscribe(data => {
-    //     console.log(data);
-    //   })
-    // } else {
-    //   this.categoryService.saveManyBrand(formBrand).subscribe(data => {
-    //     console.log(data);
-    //   });
-    // }
-  }
-
-  get brands() {
-    return this.brandForm.get('names') as FormArray
-  }
-
-  addField() {
-    this.brands.push(new FormControl('', Validators.required))
   }
 
 }
