@@ -14,13 +14,28 @@ const AUTHORIZATION = 'Authorization';
 export class AppInterceptorService implements HttpInterceptor {
 
     constructor(
-        private tokenService: TokenService, 
+        private tokenService: TokenService,
         private authService: AuthService
-        ) { }
+    ) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        throw new Error('Method not implemented.');
+        if (!this.tokenService.isLogged()) {
+            return next.handle(req);
+        }
+        let intReq = req;
+        const token = this.tokenService.getToken();
+        intReq = this.addToken(req, token);
+
+        return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {
+            if (err.status === 401) {
+                const token: Token = new Token(this.tokenService.getToken());
+                return next.handle(intReq);
+            } else {
+                this.tokenService.logOut();
+                return throwError(err);
+            }
+        }))
     }
-    
+
     private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
         return req.clone({
             headers: req.headers.set(AUTHORIZATION, 'Bearer ' + token),

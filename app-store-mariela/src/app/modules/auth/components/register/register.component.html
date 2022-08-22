@@ -4,6 +4,20 @@
         <mat-card-content>
             <form class="example-form" [formGroup]="newUserForm" (ngSubmit)="onCreate(newUserForm.value)">
                 <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="firstName">
+                    <mat-error *ngIf="newUserForm.controls.firstName.errors?.required">
+                        El nombre es <strong>requerido</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Apellido</mat-label>
+                    <input type="text" matInput formControlName="lastName">
+                    <mat-error *ngIf="newUserForm.controls.lastName.errors?.required">
+                        El apellido es <strong>requerido</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Nombre de usuario</mat-label>
                     <input type="text" matInput formControlName="userName">
                     <mat-error *ngIf="newUserForm.controls.userName.errors?.required">

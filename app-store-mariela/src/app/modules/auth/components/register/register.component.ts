@@ -12,6 +12,8 @@ export class RegisterComponent implements OnInit {
   isLogged: boolean;
 
   newUserForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
     userName: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   })

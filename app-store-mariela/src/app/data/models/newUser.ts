@@ -1,4 +1,6 @@
 export class NewUser {
+    firstName: string;
+    lastName: string;
     userName: string;
     password: string;
     role: string;
