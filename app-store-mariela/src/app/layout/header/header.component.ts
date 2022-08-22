@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenService } from '@data/services/token.service';
 import { Icons } from '@data/utils/constants/icons';
 import { StorageService } from '@shared/services/storage.service';
 import { ThemeService } from '@shared/services/theme.service';
@@ -13,13 +14,15 @@ export class HeaderComponent implements OnInit {
 
   @Output() drawer = new EventEmitter<any>();
   theme: boolean;
-  isAdmin: boolean;
+  isLogged = false;
+  isAdmin = false;
   brandImage: string;
 
   constructor(
     private themeService: ThemeService,
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {
     this.brandImage = 'assets/logo.png';
   }
@@ -28,7 +31,8 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
     this.theme = this.storageService.get('theme');
-    this.isAdmin = this.router.url === '/dashboard/admin'
+    this.isAdmin = this.tokenService.isAdmin();
+    this.isLogged = this.tokenService.isLogged();
   }
 
   onSetDrawer() {
@@ -59,7 +63,11 @@ export class HeaderComponent implements OnInit {
   }
 
   goToLogin(): void {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/auth/login-register']);
   }
 
+  onLogOut(): void {
+    this.tokenService.logOut();
+    window.location.reload();
+  }
 }

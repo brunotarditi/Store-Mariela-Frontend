@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '@data/models/category';
 import { CategoryService } from '@data/services/category.service';
+import { TokenService } from '@data/services/token.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +24,8 @@ export class CategoryComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<Category>;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  
+  isLogged = false;
+  isAdmin = false;
   id: number;
   categoryForm = new FormGroup({
     name : new FormControl('', Validators.required),
@@ -32,11 +34,14 @@ export class CategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryService, 
     private router: Router, 
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private tokenService: TokenService) {
     this.displayedColumns = ['id', 'name', 'actions'];
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.tokenService.isAdmin();
+    this.isLogged = this.tokenService.isLogged();
     this.getCategories();
     this.id = this.activatedRoute.snapshot.params['id'];
     if(this.id > 0){

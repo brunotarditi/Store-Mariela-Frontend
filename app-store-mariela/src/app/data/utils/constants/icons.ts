@@ -1,4 +1,5 @@
 export enum Icons {
+    LOGOUT = 'logout',
     LOGIN = 'login',
     MENU = 'menu',
     DARK = 'dark_mode',

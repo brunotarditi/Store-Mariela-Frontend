@@ -10,6 +10,8 @@ import { FooterComponent } from '@layout/footer/footer.component';
 import { LandingPageComponent } from './layout/landing-page/landing-page.component';
 import localeEs from '@angular/common/locales/ar';
 import { registerLocaleData } from '@angular/common';
+import { ViewAuthComponent } from './layout/auth/view-auth.component';
+import { interceptorProvider } from './interceptors/interceptor.service';
 registerLocaleData(localeEs);
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ registerLocaleData(localeEs);
     SidebarComponent,
     FooterComponent,
     LandingPageComponent,
+    ViewAuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ registerLocaleData(localeEs);
     AppRoutingModule,
   ],
   providers: [
+    interceptorProvider,
     {provide: LOCALE_ID, useValue: 'ar-AR'}
   ],
   bootstrap: [AppComponent]

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 const TOKEN_KEY = 'AuthToken';
 @Injectable({
     providedIn: 'root',
 })
 export class TokenService {
     roles: Array<string> = [];
-    constructor(private router: Router) { }
+    constructor() { }
 
     public setToken(token: string): void {
         sessionStorage.removeItem(TOKEN_KEY);
@@ -44,7 +43,7 @@ export class TokenService {
         const payload = token.split('.')[1];
         const payloadDecoded = atob(payload);
         const values = JSON.parse(payloadDecoded);
-        const roles = values.roles;
+        const roles = values.role;
         if (roles.indexOf('admin') < 0) {
             return false;
         } else {

@@ -9,14 +9,17 @@
       <mat-icon *ngIf="theme">{{ Icons.DARK }}</mat-icon>
       <mat-icon *ngIf="!theme">{{ Icons.LIGHT }}</mat-icon>
     </button>
-    <button *ngIf="!isAdmin" mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
-      <mat-icon *ngIf="!isAdmin">{{ Icons.DASHBOARD }}</mat-icon>
+    <button *ngIf="isAdmin && isLogged" mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
+      <mat-icon>{{ Icons.DASHBOARD }}</mat-icon>
     </button>
-    <button *ngIf="isAdmin" mat-icon-button class="example-icon" title="home" (click)="goToHome()">
+    <button *ngIf="!isAdmin && isLogged" mat-icon-button class="example-icon" title="home" (click)="goToHome()">
       <mat-icon>{{ Icons.HOME }}</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" title="login" (click)="goToLogin()">
+    <button *ngIf="!isLogged" mat-icon-button class="example-icon" title="login" (click)="goToLogin()">
       <mat-icon>{{ Icons.LOGIN }}</mat-icon>
+    </button>
+    <button *ngIf="isLogged" mat-icon-button class="example-icon" title="logout" (click)="onLogOut()">
+      <mat-icon>{{ Icons.LOGOUT }}</mat-icon>
     </button>
   </mat-toolbar>
 </header>

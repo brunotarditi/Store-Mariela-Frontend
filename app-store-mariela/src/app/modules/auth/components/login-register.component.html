@@ -1,0 +1,88 @@
+<div class="container">
+    <mat-tab-group mat-align-tabs="center" dynamicHeight>
+        <mat-tab label="Inicio de sesión">
+            <div class="example-small-box mat-elevation-z4">
+                <mat-card>
+                    <mat-card-subtitle>Inicio de sesión</mat-card-subtitle>
+                    <mat-card-content>
+                        <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Nombre de usuario</mat-label>
+                                <input type="text" matInput formControlName="userName">
+                                <mat-error *ngIf="loginForm.controls.userName.errors?.required">
+                                    El nombre de usuario es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Contraseña</mat-label>
+                                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" autocomplete="off">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="loginForm.controls.password.errors?.required">
+                                    La contraseña es <strong>requerida</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-card-actions class="mt-1">
+                                <button class="example-full-width" mat-raised-button color="primary" [disabled]="!loginForm.valid">
+                                    Iniciar sesión
+                                </button>
+                            </mat-card-actions>
+                        </form>
+                        <button type="button" class="example-full-width" mat-raised-button color="warn" (click)="goToHome()">
+                            Volver a inicio
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Nuevo usuario">
+            <div class="example-small-box mat-elevation-z4">
+                <mat-card>
+                    <mat-card-subtitle>Nuevo usuario</mat-card-subtitle>
+                    <mat-card-content>
+                        <form class="example-form" [formGroup]="newUserForm" (ngSubmit)="onCreate(newUserForm.value)">
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Nombre</mat-label>
+                                <input type="text" matInput formControlName="firstName">
+                                <mat-error *ngIf="newUserForm.controls.firstName.errors?.required">
+                                    El nombre es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Apellido</mat-label>
+                                <input type="text" matInput formControlName="lastName">
+                                <mat-error *ngIf="newUserForm.controls.lastName.errors?.required">
+                                    El apellido es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Nombre de usuario</mat-label>
+                                <input type="text" matInput formControlName="userName">
+                                <mat-error *ngIf="newUserForm.controls.userName.errors?.required">
+                                    El nombre de usuario es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-label>Contraseña</mat-label>
+                                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" autocomplete="off">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <mat-card-actions class="mt-1">
+                                <button class="example-full-width" mat-raised-button
+                                    color="primary">Registrarse</button>
+                            </mat-card-actions>
+                        </form>
+                        <button type="button" class="example-full-width" mat-raised-button color="warn" (click)="goToHome()">Volver a
+                            inicio</button>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+</div>

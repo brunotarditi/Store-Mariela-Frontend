@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -42,7 +43,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTabsModule
   ],
   exports:[
     MatSidenavModule,
@@ -64,7 +66,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatCheckboxModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTabsModule
 
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}]

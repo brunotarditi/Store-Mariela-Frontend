@@ -14,16 +14,16 @@ export class AuthService {
     private authUrl = environment.authUrl;
     constructor(private http: HttpClient) { }
 
-    create(nuevoUsuario: NewUser): Observable<any> {
+    create(newUser: NewUser): Observable<any> {
         const requestOptions: Object = {
             /* other options here */
             responseType: 'text'
         }
-        return this.http.post<any>(this.authUrl + '/create', nuevoUsuario, requestOptions);
+        return this.http.post<any>(this.authUrl + '/create', newUser, requestOptions);
     }
 
-    login(loginUsuario: Login): Observable<Token> {
-        return this.http.post<Token>(this.authUrl + '/login', loginUsuario);
+    login(login: Login): Observable<Token> {
+        return this.http.post<Token>(this.authUrl + '/login', login);
     }
 
 

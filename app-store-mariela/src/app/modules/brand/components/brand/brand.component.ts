@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Brand } from '@data/models/brand';
 import { BrandService } from '@data/services/brand.service';
+import { TokenService } from '@data/services/token.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-brand',
@@ -23,6 +24,8 @@ export class BrandComponent implements OnInit {
   dataSource: MatTableDataSource<Brand>;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   
+  isLogged = false;
+  isAdmin = false;
   hiddenButton: boolean;
   id: number;
   brandForm = new FormGroup({
@@ -33,7 +36,9 @@ export class BrandComponent implements OnInit {
   constructor(
     private brandService: BrandService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private tokenService: TokenService
+    ) {
     this.displayedColumns = ['id', 'name', 'actions'];
   }
 
@@ -44,6 +49,8 @@ export class BrandComponent implements OnInit {
       this.hiddenButton = true
       this.getBrandById(this.id);
     }
+    this.isAdmin = this.tokenService.isAdmin();
+    this.isLogged = this.tokenService.isLogged();
   }
 
   searchFilter(event: Event) {
@@ -54,7 +61,7 @@ export class BrandComponent implements OnInit {
   }
 
   getBrands(): void {
-    this.brandService.getAllBrands().subscribe(data => {
+    this.brandService.getAllBrandsEnabled().subscribe(data => {
       this.dataSource = new MatTableDataSource<Brand>(data);
 
       this.dataSource.filterPredicate = (data: Brand, filter: string) => {
@@ -87,7 +94,7 @@ export class BrandComponent implements OnInit {
             confirmButtonText: 'Ok'
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['/dashboard/categories'])
+              this.router.navigate(['/dashboard/brands'])
             }
           });
         })
@@ -154,7 +161,7 @@ export class BrandComponent implements OnInit {
           confirmButtonText: 'Volver'
         }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate(['/dashboard/categories'])
+            this.router.navigate(['/dashboard/brands'])
           }
         });
       })
