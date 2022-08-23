@@ -7,6 +7,7 @@ import { Product } from '@data/models/product';
 import { BrandService } from '@data/services/brand.service';
 import { CategoryService } from '@data/services/category.service';
 import { ProductService } from '@data/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-save-product',
@@ -14,7 +15,7 @@ import { ProductService } from '@data/services/product.service';
   styleUrls: ['./save-product.component.scss']
 })
 export class SaveProductComponent implements OnInit {
-  text = 'Nuevo producto';
+  text: string;
   product: Product; 
   brands: Brand[];
   categories: Category[];
@@ -41,6 +42,7 @@ export class SaveProductComponent implements OnInit {
     if(this.id > 0){
       this.getProductById(this.id);
     }
+    this.text = this.id > 0 ? 'Editar producto' : 'Nuevo producto';
   }
 
   getBrands(){
@@ -64,11 +66,27 @@ export class SaveProductComponent implements OnInit {
   onSubmit(productForm: Product):void{
     if (this.id > 0) {
       this.productService.editProduct(productForm, this.id).subscribe(data => {
-        this.router.navigate(['/inventory']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto editado.',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/dashboard/inventory']);
+          }
+        });
       });
     }else{
       this.productService.saveProduct(productForm).subscribe(data => {
-        this.router.navigate(['/inventory']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto guardado.',
+          confirmButtonText: 'Ok'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/dashboard/inventory']);
+          }
+        });
       });
     }
   }

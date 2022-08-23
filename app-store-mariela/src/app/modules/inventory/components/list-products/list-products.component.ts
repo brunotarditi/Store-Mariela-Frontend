@@ -7,6 +7,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogFormStockComponent } from '../dialog-form-stock/dialog-form-stock.component';
+import { TokenService } from '@data/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-products',
@@ -23,16 +25,21 @@ export class ListProductsComponent implements OnInit {
   dataSource: MatTableDataSource<Product>;
 
   pageSizeOptions: number[] = [5, 10, 25, 100];
-
+  isLogged = false;
+  isAdmin = false;
   constructor(
     private productService: ProductService, 
     private router: Router, 
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private tokenService: TokenService
+    ) {
     this.displayedColumns = ['id', 'name', 'price', 'actions']
     
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.tokenService.isAdmin();
+    this.isLogged = this.tokenService.isLogged();
     this.getProducts();
   }
 
@@ -83,10 +90,28 @@ export class ListProductsComponent implements OnInit {
 
   onDelete(id:number){
     this.productService.deleteProduct(id).subscribe(data => {
-      console.log(data)
+      console.log(data);
+      Swal.fire({
+        icon: 'success',
+        title: data.message,
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
     },
     err => {
-      console.log(err)
+      console.log(err);
+      Swal.fire({
+        icon: 'error',
+        title: err.error.message,
+        confirmButtonText: 'Volver'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/dashboard/inventory'])
+        }
+      });
     })
   }
 

@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
   exports:[
     MatSidenavModule,
@@ -67,7 +69,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCheckboxModule,
     MatStepperModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
 
   ],
   providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}]

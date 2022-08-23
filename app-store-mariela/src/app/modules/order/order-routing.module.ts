@@ -5,7 +5,7 @@ import { OrderProcessComponent } from './order-process/order-process.component';
 
 const routes: Routes = [
   { path: '', component: ListOrdersComponent },
-  { path: 'new', component: OrderProcessComponent },
+  { path: 'new/:id', component: OrderProcessComponent },
 ];
 
 @NgModule({

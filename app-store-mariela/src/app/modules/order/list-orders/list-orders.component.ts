@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { Order } from '@data/models/order';
 import { OrderService } from '@data/services/order.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-orders',
@@ -14,68 +13,68 @@ import { OrderService } from '@data/services/order.service';
 export class ListOrdersComponent implements OnInit {
 
   text = 'Pedidos';
-  @ViewChild(MatTable) myTable!: MatTable<any>;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   order: Order;
-  displayedColumns: string[];
-  dataSource: MatTableDataSource<Order>;
-
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  orders: any;
 
   constructor(
     private orderService: OrderService,
     private router: Router) {
-    this.displayedColumns = ['id', 'total', 'status', 'actions']
   }
 
   ngOnInit(): void {
     this.getOrders();
   }
 
-  searchFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator)
-      this.dataSource.paginator.firstPage();
-  }
-
-
   getOrders(): void {
-    this.orderService.getAllOrders().subscribe(data => {
-      console.log(data)
-      this.dataSource = new MatTableDataSource<Order>(data);
-      this.dataSource.filterPredicate = (data: any,  filter: string) => {
-        return data.name.trim().toLowerCase().indexOf(filter) !== -1
-      }
-      if (this.dataSource) {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      }
+    this.orderService.getAllOrdersEnabledWithDetails().subscribe(data => {
+      console.log(data.Orders)
+      this.orders = data.Orders
     },
       err => {
         console.log(err)
       },
-  );
-}
+    );
+  }
 
   addOrder(): void {
-    let order: Order = {id:0, total: 0, status: 0, creatAt: new Date(), updateAt: new Date(), isDelete: false}
+    let order: Order = { id: 0, total: 0, status: 0, creatAt: new Date(), updateAt: new Date(), isDelete: false }
     this.orderService.saveOrder(order).subscribe(data => {
-        console.log(data);
-        
+      console.log(data)
+      this.getOrders();
+    });
+    
+  }
+
+  addDetail(index: number) {
+    this.router.navigate(['/dashboard/orders/new/' + index ]);
+  }
+
+  onDelete(id: number) {
+    this.orderService.deleteProduct(id).subscribe(data => {
+      console.log(data);
+      Swal.fire({
+        icon: 'success',
+        title: data.message,
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
       });
-        this.getOrders();
-        this.myTable.renderRows();
-        this.dataSource._updateChangeSubscription();
-  }
-
-  goToDetail(index: number) {
-    this.router.navigate(['/dashboard/inventory/detail/' + index]);
-  }
-
-  addDetail(index: number){
-    this.router.navigate(['/dashboard/orders/new']);
+    },
+      err => {
+        console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message,
+          confirmButtonText: 'Volver'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/dashboard/orders'])
+          }
+        });
+      })
   }
 
 }

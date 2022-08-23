@@ -26,11 +26,29 @@ export class OrderService extends ApiStoreMariela {
 
     /**
      * 
+     * @returns all orders
+     */
+    getAllOrdersEnabledWithDetails(): Observable<any> {
+        const response = { error: false, msg: '', data: null };
+        return this.http.get<any>(this.apiUrl + RequestMapping.ORDER + '/allEnabledWithDetails', { headers: this.header })
+    }
+
+    /**
+     * 
      * @param order 
      * @returns save one order
      */
     saveOrder(order: Order): Observable<Order> {
         return this.http.post<Order>(this.apiUrl + RequestMapping.ORDER + '/save', order, { headers: this.header });
+    }
+
+    /**
+  * 
+  * @param id
+  * @returns delete one order
+  */
+    deleteProduct(id:number): Observable<any> {
+        return this.http.delete<any>(this.apiUrl + RequestMapping.ORDER + '/delete/' + id, { headers: this.header });
     }
 
 }
