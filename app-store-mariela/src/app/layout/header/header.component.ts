@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '@data/models/user';
+import { AuthService } from '@data/services/auth.service';
 import { TokenService } from '@data/services/token.service';
 import { Icons } from '@data/utils/constants/icons';
 import { StorageService } from '@shared/services/storage.service';
@@ -14,15 +16,18 @@ export class HeaderComponent implements OnInit {
 
   @Output() drawer = new EventEmitter<any>();
   theme: boolean;
+  isDashboard: boolean;
   isLogged = false;
   isAdmin = false;
   brandImage: string;
-
+  userName: string;
+  user: User;
   constructor(
     private themeService: ThemeService,
     private storageService: StorageService,
     private router: Router,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private authService: AuthService
   ) {
     this.brandImage = 'assets/logo.png';
   }
@@ -30,9 +35,14 @@ export class HeaderComponent implements OnInit {
   get Icons() { return Icons }
   
   ngOnInit(): void {
+    this.userName = this.tokenService.getUserName();
+    this.authService.getUser(this.userName).subscribe((data) => {
+      this.user = data;
+    });
     this.theme = this.storageService.get('theme');
     this.isAdmin = this.tokenService.isAdmin();
     this.isLogged = this.tokenService.isLogged();
+    this.isDashboard = this.router.url == '/home' ? false : true
   }
 
   onSetDrawer() {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Login } from '@data/models/login';
 import { NewUser } from '@data/models/newUser';
 import { Token } from '@data/models/token';
+import { User } from '@data/models/user';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
 
@@ -24,6 +25,10 @@ export class AuthService {
 
     login(login: Login): Observable<Token> {
         return this.http.post<Token>(this.authUrl + '/login', login);
+    }
+
+    getUser(userName: string): Observable<User>{
+        return this.http.get<User>(this.authUrl + '/user/' + userName)
     }
 
 

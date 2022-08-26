@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar color="primary" class="mat-elevation-z8">
-    <button *ngIf="isAdmin" mat-icon-button class="example-icon" (click)="onSetDrawer()">
+    <button *ngIf="isAdmin && isDashboard" mat-icon-button class="example-icon" (click)="onSetDrawer()">
         <mat-icon>{{ Icons.MENU}}</mat-icon>
     </button>
     <span><img [src]="brandImage" class="img" alt="logo" (click)="goToHome()" style="cursor: pointer;"></span>
@@ -12,8 +12,8 @@
     <button *ngIf="isAdmin && isLogged" mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
       <mat-icon>{{ Icons.DASHBOARD }}</mat-icon>
     </button>
-    <button *ngIf="isLogged" mat-icon-button class="example-icon" title="usuario">
-      <mat-icon>{{ Icons.USER }}</mat-icon>
+    <button *ngIf="isLogged" mat-mini-fab class="example-icon" title="usuario">
+      {{ user.firstName | slice:0:1 }} {{ user.lastName | slice:0:1 }}
     </button>
     <button *ngIf="!isLogged" mat-icon-button class="example-icon" title="login" (click)="goToLogin()">
       <mat-icon>{{ Icons.LOGIN }}</mat-icon>
