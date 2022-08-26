@@ -5,4 +5,5 @@ export interface Order {
     creatAt: Date;
     updateAt: Date;
     isDelete: boolean;
+    paymentMethod: string;
 }

@@ -38,7 +38,7 @@ export class ListOrdersComponent implements OnInit {
   }
 
   addOrder(): void {
-    let order: Order = { id: 0, total: 0, status: 0, creatAt: new Date(), updateAt: new Date(), isDelete: false }
+    let order: Order = { id: 0, total: 0, status: 0, creatAt: new Date(), updateAt: new Date(), isDelete: false, paymentMethod: "" }
     this.orderService.saveOrder(order).subscribe(data => {
       console.log(data)
       this.getOrders();

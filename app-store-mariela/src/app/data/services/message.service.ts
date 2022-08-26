@@ -10,8 +10,8 @@ export class MessageService {
 
   constructor() { }
 
-  sendMessage(product: Product): void{
-    this.message.next(product);
+  sendMessage(data:any): void{
+    this.message.next(data);
   }
 
   getMessage(): Observable<any>{

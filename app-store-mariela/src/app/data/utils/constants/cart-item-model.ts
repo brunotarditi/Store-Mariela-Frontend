@@ -5,11 +5,16 @@ export class CartItemModel{
     productName: string;
     productPrice: number;
     productQuantity: number;
+    index: number;
+    idOrderDetail: number;
+    idOrder: number;
 
-    constructor(product: Product){
+    constructor(product: Product, productQuantity: number, index: number, idOrderDetail: number){
         this.productId = product.id;
         this.productName = product.name;
         this.productPrice = product.price;
-        this.productQuantity = 1;
+        this.productQuantity = productQuantity;
+        this.index = index;
+        this.idOrderDetail= idOrderDetail;
     }
 }

@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Order } from '@data/models/order';
+import { OrderDetail } from '@data/models/order-detail';
 import { Product } from '@data/models/product';
 import { MessageService } from '@data/services/message.service';
+import { OrderDetailService } from '@data/services/order-detail.service';
+import { OrderService } from '@data/services/order.service';
 import { CartItemModel } from '@data/utils/constants/cart-item-model';
 import { DataService } from '@shared/services/data.service';
+import { StorageService } from '@shared/services/storage.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,29 +18,41 @@ import { DataService } from '@shared/services/data.service';
 export class CartComponent implements OnInit {
   cartItems: CartItemModel[] = [];
   total: number;
-  constructor(private messageService: MessageService, private dataService: DataService) {
+  idOrder: number;
+  order: Order;
+  constructor(
+    private messageService: MessageService,
+    private dataService: DataService,
+    private orderDetailService: OrderDetailService,
+    private orderService: OrderService,
+    private activatedRoute: ActivatedRoute,
+    private storageService: StorageService,
+  ) {
     this.total = 0;
   }
 
   ngOnInit(): void {
+    this.idOrder = this.activatedRoute.snapshot.params['id'];
+    if (this.storageService.exist('cart' + this.idOrder)) {
+      this.cartItems = this.storageService.get('cart' + this.idOrder);
+      this.dataService.isCompleted$.emit(true);
+    }
     this.getItem();
     this.total = this.getTotal();
+    this.getOrder();
   }
 
 
   getItem(): void {
-    this.messageService.getMessage().subscribe((product: Product) => {
-      let exist = false;
-      this.cartItems.forEach((item) => {
-        if (item.productId === product.id) {
-          exist = true;
-          item.productQuantity++;
-        }
+    this.messageService.getMessage().subscribe((data: any) => {
+        let orderDetail= new OrderDetail(data.count.quantityItem, data.product.price, this.idOrder, data.product.id,);
+        this.orderDetailService.addToCart(data.product.id, orderDetail).subscribe((orderDetailBd) => {
+          console.log(orderDetail);
+          const cartItem = new CartItemModel(data.product, data.count.quantityItem, data.index, orderDetailBd.id);
+          this.cartItems.push(cartItem);
+          this.total = this.getTotal();
+        this.storageService.set('cart' + this.idOrder, this.cartItems);
       });
-      if (!exist) {
-        const cartItem = new CartItemModel(product);
-        this.cartItems.push(cartItem);
-      }
     });
   }
 
@@ -53,17 +71,31 @@ export class CartComponent implements OnInit {
     this.dataService.isCompleted$.emit(false);
   }
 
-  deleteItem(index: number): void{
-    
-    if (this.cartItems[index].productQuantity > 1) {
-      this.cartItems[index].productQuantity--;
-    }else{
-      this.cartItems.splice(index, 1);
+  deleteItem(i: number): void {
+    let index = this.cartItems[i].index
+    let idOrderDetail = this.cartItems[i].idOrderDetail;
+    this.orderDetailService.deleteToCart(idOrderDetail).subscribe((data) => {
+      console.log(data);
+      this.cartItems.splice(i, 1);
+      this.dataService.hideAddCart$.emit(index);
       if (this.cartItems.length < 1) {
         this.dataService.isCompleted$.emit(false);
       }
-    }
-    this.total = this.getTotal();
+      this.total = this.getTotal();
+    })
   }
 
+  getOrder(){
+    this.orderService.getOrder(this.idOrder).subscribe((data) => {
+      this.order = data;
+      this.order.status = 3;
+    });
+  }
+
+  changeStatus(){
+    this.orderService.updateOrder(this.idOrder, this.order).subscribe((data) => {
+      console.log(data);
+      
+    });
+  }
 }

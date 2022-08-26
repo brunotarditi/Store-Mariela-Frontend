@@ -4,11 +4,11 @@
     </button>
 </div>
 <div *ngIf="cartItems.length > 0">
-    <div *ngIf="cartItems.length > 0">
+    <!-- <div *ngIf="cartItems.length > 0">
         <button class="emptyCart" mat-raised-button color="warn" (click)="emptyCart()">
             <mat-icon>remove_circle</mat-icon> Vaciar carrito
         </button>
-    </div>
+    </div> -->
     <div *ngFor="let item of cartItems; index as i">
         <div class="container">
             <div class="col col-2">
@@ -28,5 +28,5 @@
     </div>
 </div>
 <div class="btn-right" *ngIf="cartItems.length > 0">
-    <button mat-raised-button matStepperNext color="accent">Siguiente</button>
+    <button (click)="changeStatus()" mat-raised-button matStepperNext color="accent">Siguiente</button>
 </div>

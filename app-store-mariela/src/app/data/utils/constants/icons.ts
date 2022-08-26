@@ -5,5 +5,5 @@ export enum Icons {
     DARK = 'dark_mode',
     LIGHT = 'light_mode',
     DASHBOARD = 'space_dashboard',
-    HOME = 'home',
+    USER = 'person',
 }

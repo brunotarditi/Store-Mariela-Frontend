@@ -43,10 +43,30 @@ export class OrderService extends ApiStoreMariela {
     }
 
     /**
-  * 
-  * @param id
-  * @returns delete one order
-  */
+     * 
+     * @param id 
+     * @param order 
+     * @returns update one order
+     */
+    updateOrder(id:number, order: Order): Observable<Order>{
+        return this.http.put<Order>(this.apiUrl + RequestMapping.ORDER + '/' + id, order, { headers: this.header });
+    }
+
+    /**
+     * 
+     * @param id 
+     * @param order 
+     * @returns update one order
+     */
+    getOrder(id:number): Observable<Order>{
+        return this.http.get<Order>(this.apiUrl + RequestMapping.ORDER + '/' + id, { headers: this.header });
+    }
+
+    /**
+     * 
+     * @param id
+     * @returns delete one order
+     */
     deleteProduct(id:number): Observable<any> {
         return this.http.delete<any>(this.apiUrl + RequestMapping.ORDER + '/delete/' + id, { headers: this.header });
     }

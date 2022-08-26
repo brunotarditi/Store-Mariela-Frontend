@@ -12,8 +12,8 @@
     <button *ngIf="isAdmin && isLogged" mat-icon-button class="example-icon" title="dashboard" (click)="goToDashboard()">
       <mat-icon>{{ Icons.DASHBOARD }}</mat-icon>
     </button>
-    <button *ngIf="!isAdmin && isLogged" mat-icon-button class="example-icon" title="home" (click)="goToHome()">
-      <mat-icon>{{ Icons.HOME }}</mat-icon>
+    <button *ngIf="isLogged" mat-icon-button class="example-icon" title="usuario">
+      <mat-icon>{{ Icons.USER }}</mat-icon>
     </button>
     <button *ngIf="!isLogged" mat-icon-button class="example-icon" title="login" (click)="goToLogin()">
       <mat-icon>{{ Icons.LOGIN }}</mat-icon>

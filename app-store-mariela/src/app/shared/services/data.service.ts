@@ -6,5 +6,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class DataService {
   isCompleted$ = new EventEmitter<boolean>();
   total$ = new EventEmitter<number>();
+  hideAddCart$ = new EventEmitter<number>();
   constructor() { }
 }

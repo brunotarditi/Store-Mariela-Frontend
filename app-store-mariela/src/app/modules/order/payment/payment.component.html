@@ -31,7 +31,7 @@
     <div class="btn-right">
         <div class="example-button-row">
             <button mat-button mat-raised-button matStepperPrevious color="warn">Volver</button>
-            <button mat-raised-button matStepperNext color="accent" [disabled]="!next">Finalizar</button>
+            <button (click)="changeStatus()" mat-raised-button matStepperNext color="accent" [disabled]="!next">Finalizar</button>
         </div>
     </div>
 </form>

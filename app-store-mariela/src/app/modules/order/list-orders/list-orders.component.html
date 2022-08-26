@@ -23,11 +23,11 @@
                         <div *ngSwitchCase="'CANCELLED'">Cancelado</div>
                         <div *ngSwitchCase="'DELIVERED'">Pagado y entregado</div>
                         <div *ngSwitchDefault>Sin estado</div>
-                        <button *ngIf="item.orderDetailDtos.length == 0" mat-icon-button color="warn" class="actionsBtn" (click)="addDetail(item.id)"
+                        <button *ngIf="item.status == 'NEW_ORDER' || item.status == 'PREPARATION'" mat-icon-button color="warn" class="actionsBtn" (click)="addDetail(item.id)"
                             matTooltip="Agregar productos al pedido" matTooltipPosition="above">
                             <mat-icon>add</mat-icon>
                         </button>
-                        <button *ngIf="item.orderDetailDtos.length == 0" mat-icon-button color="warn" class="actionsBtn" (click)="onDelete(item.id)"
+                        <button *ngIf="item.status == 'NEW_ORDER'" mat-icon-button color="warn" class="actionsBtn" (click)="onDelete(item.id)"
                             matTooltip="Eliminar producto" matTooltipPosition="above">
                             <mat-icon>delete</mat-icon>
                         </button>
@@ -35,9 +35,11 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div *ngFor="let subItem of item.orderDetailDtos">
-                    <span>Cantidad: {{ subItem.quantity }} </span>
-                    <span>Subtotal: {{ subItem.subtotal | currency:'AR':'$':'1.2-2'}}</span>
-
+                    <div class="grid">
+                        <span>Cantidad: {{ subItem.quantity }} </span>
+                        <span>Subtotal: {{ subItem.subtotal | currency:'AR':'$':'1.2-2'}}</span>
+                        <span>Método de pago: {{ item.paymentMethod }} </span>
+                    </div>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

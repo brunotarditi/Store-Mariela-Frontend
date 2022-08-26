@@ -4,10 +4,6 @@
 </mat-form-field>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>#</th>
-            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-        </ng-container>
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Nombre</th>
             <td mat-cell *matCellDef="let row">{{ row.name }}</td>
@@ -20,10 +16,23 @@
                 </div>
             </td>
         </ng-container>
+        <ng-container matColumnDef="current">
+            <th mat-header-cell *matHeaderCellDef>Disponible</th>
+            <td mat-cell *matCellDef="let row">{{ row.stockControl.current }}</td>
+        </ng-container>
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Agregar a carrito</th>
-            <td mat-cell *matCellDef="let row">
-                <button (click)="addToCart(row)" mat-mini-fab color="primary" class="actionsBtn"
+            <td mat-cell *matCellDef="let row; let i = index">
+                <button (click)="countDecrement(i)" mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <mat-form-field appearance="fill" class="textSize">
+                    <input numberOnly [allowDecimals]="false" matInput [(ngModel)]="counts[i].quantityItem">
+                </mat-form-field>
+                <button (click)="countIncrement(i, row)" mat-icon-button color="accent" aria-label="Example icon button with a menu icon">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button *ngIf="counts[i].addCart" (click)="addToCart(row, i)" mat-mini-fab color="primary" class="actionsBtn ml"
                     matTooltip="Ver compras y stock" matTooltipPosition="above">
                     <mat-icon>add_shopping_cart</mat-icon>
                 </button>

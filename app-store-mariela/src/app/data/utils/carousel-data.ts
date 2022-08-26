@@ -4,30 +4,30 @@ export const CAROUSEL_DATA : CarouselItem[] = [
     {
         id: 1,
         title: {
-            first: 'Nuevo título',
-            second: 'Número 1'
+            first: '',
+            second: ''
         },
-        subTitle: 'Este es el subtitulo',
+        subTitle: '',
         link: '/',
-        image: './assets/images/reglas.jpg'
+        image: './assets/images/libreria.jpg'
     },
     {
         id: 2,
         title: {
-            first: 'Nuevo título',
-            second: 'Número 2'
+            first: '',
+            second: ''
         },
-        subTitle: 'Este es el subtitulo',
+        subTitle: '',
         link: '/',
         image: './assets/images/colores.jpg'
     },
     {
         id: 2,
         title: {
-            first: 'Nuevo título',
-            second: 'Número 3'
+            first: '',
+            second: ''
         },
-        subTitle: 'Este es el subtitulo',
+        subTitle: '',
         link: '/',
         image: './assets/images/pinceles.jpg'
     }
